@@ -19,15 +19,6 @@ namespace Media_Player
             paths = new List<string>();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             // Check if there is a next song
@@ -41,10 +32,6 @@ namespace Media_Player
             axWindowsMediaPlayer1.URL = paths[listBox1.SelectedIndex];
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
         private void button5_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
@@ -72,11 +59,6 @@ namespace Media_Player
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.URL = paths[listBox1.SelectedIndex];
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
 
         }
 
