@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMusicPlayer));
             this.containerMain = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelFavorite = new System.Windows.Forms.Panel();
@@ -50,14 +52,20 @@
             this.listSongs = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listVideos = new System.Windows.Forms.ListBox();
-            this.labelMusic = new System.Windows.Forms.Label();
-            this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBack = new FontAwesome.Sharp.IconButton();
+            this.btnPlay = new FontAwesome.Sharp.IconButton();
+            this.btnNext = new FontAwesome.Sharp.IconButton();
+            this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
             this.containerMain.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -70,7 +78,8 @@
             this.tabSongVideo.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +87,7 @@
             // containerMain
             // 
             this.containerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.containerMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.containerMain.Location = new System.Drawing.Point(0, 0);
             this.containerMain.Name = "containerMain";
             this.containerMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -89,25 +99,51 @@
             // containerMain.Panel2
             // 
             this.containerMain.Panel2.BackColor = System.Drawing.Color.Gray;
-            this.containerMain.Panel2.Controls.Add(this.axWindowsMediaPlayer);
+            this.containerMain.Panel2.Controls.Add(this.panel2);
             this.containerMain.Size = new System.Drawing.Size(1091, 740);
-            this.containerMain.SplitterDistance = 537;
+            this.containerMain.SplitterDistance = 636;
             this.containerMain.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.splitContainer2);
+            this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1091, 537);
+            this.panel1.Size = new System.Drawing.Size(1091, 636);
             this.panel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.axWindowsMediaPlayer, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.splitContainer2, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1091, 636);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // axWindowsMediaPlayer
+            // 
+            this.axWindowsMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axWindowsMediaPlayer.Enabled = true;
+            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(1100, 3);
+            this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
+            this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(253, 630);
+            this.axWindowsMediaPlayer.TabIndex = 1;
+            this.axWindowsMediaPlayer.CurrentItemChange += new AxWMPLib._WMPOCXEvents_CurrentItemChangeEventHandler(this.axWindowsMediaPlayer_CurrentItemChange);
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -121,8 +157,7 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(214)))), ((int)(((byte)(198)))));
             this.splitContainer2.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainer2.Panel2.Controls.Add(this.tabSongVideo);
-            this.splitContainer2.Panel2.Controls.Add(this.labelMusic);
-            this.splitContainer2.Size = new System.Drawing.Size(1091, 537);
+            this.splitContainer2.Size = new System.Drawing.Size(1091, 630);
             this.splitContainer2.SplitterDistance = 185;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -144,7 +179,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(165, 517);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(165, 610);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // panelFavorite
@@ -344,7 +379,7 @@
             this.btnHome.Text = "HOME";
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHome.UseVisualStyleBackColor = true;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click_1);
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // groupBox1
             // 
@@ -377,21 +412,21 @@
             this.tabSongVideo.Controls.Add(this.tabPage1);
             this.tabSongVideo.Controls.Add(this.tabPage2);
             this.tabSongVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabSongVideo.Location = new System.Drawing.Point(0, 74);
+            this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabSongVideo.Location = new System.Drawing.Point(0, 0);
             this.tabSongVideo.Name = "tabSongVideo";
             this.tabSongVideo.SelectedIndex = 0;
-            this.tabSongVideo.Size = new System.Drawing.Size(902, 463);
+            this.tabSongVideo.Size = new System.Drawing.Size(902, 630);
             this.tabSongVideo.TabIndex = 0;
             this.tabSongVideo.SelectedIndexChanged += new System.EventHandler(this.tabSongVideo_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.listSongs);
-            this.tabPage1.Location = new System.Drawing.Point(4, 38);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(894, 421);
+            this.tabPage1.Size = new System.Drawing.Size(894, 592);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Songs";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -399,21 +434,22 @@
             // listSongs
             // 
             this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listSongs.FormattingEnabled = true;
             this.listSongs.ItemHeight = 29;
             this.listSongs.Location = new System.Drawing.Point(3, 3);
             this.listSongs.Name = "listSongs";
-            this.listSongs.Size = new System.Drawing.Size(888, 415);
+            this.listSongs.Size = new System.Drawing.Size(888, 586);
             this.listSongs.TabIndex = 0;
             this.listSongs.SelectedIndexChanged += new System.EventHandler(this.listSongs_SelectedIndexChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listVideos);
-            this.tabPage2.Location = new System.Drawing.Point(4, 38);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(894, 421);
+            this.tabPage2.Size = new System.Drawing.Size(894, 592);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Videos";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -421,36 +457,105 @@
             // listVideos
             // 
             this.listVideos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listVideos.FormattingEnabled = true;
             this.listVideos.ItemHeight = 29;
             this.listVideos.Location = new System.Drawing.Point(3, 3);
             this.listVideos.Name = "listVideos";
-            this.listVideos.Size = new System.Drawing.Size(888, 415);
+            this.listVideos.Size = new System.Drawing.Size(888, 586);
             this.listVideos.TabIndex = 0;
             this.listVideos.SelectedIndexChanged += new System.EventHandler(this.listVideos_SelectedIndexChanged);
             // 
-            // labelMusic
+            // panel2
             // 
-            this.labelMusic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(145)))), ((int)(((byte)(151)))));
-            this.labelMusic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelMusic.Font = new System.Drawing.Font("JetBrains Mono NL ExtraBold", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMusic.ForeColor = System.Drawing.Color.White;
-            this.labelMusic.Location = new System.Drawing.Point(0, 0);
-            this.labelMusic.Name = "labelMusic";
-            this.labelMusic.Size = new System.Drawing.Size(902, 74);
-            this.labelMusic.TabIndex = 2;
-            this.labelMusic.Text = "MUSIC";
-            this.labelMusic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel2.Controls.Add(this.tableLayoutPanel3);
+            this.panel2.Controls.Add(this.labeMediaName);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1091, 100);
+            this.panel2.TabIndex = 1;
             // 
-            // axWindowsMediaPlayer
+            // tableLayoutPanel3
             // 
-            this.axWindowsMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axWindowsMediaPlayer.Enabled = true;
-            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(0, 0);
-            this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
-            this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(1091, 199);
-            this.axWindowsMediaPlayer.TabIndex = 1;
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Teal;
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.Controls.Add(this.btnBack, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnPlay, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnNext, 2, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 47);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1091, 53);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            this.btnBack.IconColor = System.Drawing.SystemColors.Control;
+            this.btnBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBack.IconSize = 32;
+            this.btnBack.Location = new System.Drawing.Point(20, 10);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(323, 33);
+            this.btnBack.TabIndex = 0;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPlay.FlatAppearance.BorderSize = 0;
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlay.IconChar = FontAwesome.Sharp.IconChar.Pause;
+            this.btnPlay.IconColor = System.Drawing.SystemColors.Control;
+            this.btnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPlay.IconSize = 32;
+            this.btnPlay.Location = new System.Drawing.Point(383, 10);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(323, 33);
+            this.btnPlay.TabIndex = 1;
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.IconChar = FontAwesome.Sharp.IconChar.ArrowRight;
+            this.btnNext.IconColor = System.Drawing.SystemColors.Control;
+            this.btnNext.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnNext.IconSize = 32;
+            this.btnNext.Location = new System.Drawing.Point(746, 10);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(325, 33);
+            this.btnNext.TabIndex = 2;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // labeMediaName
+            // 
+            this.labeMediaName.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.labeMediaName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labeMediaName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeMediaName.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.labeMediaName.Location = new System.Drawing.Point(0, 0);
+            this.labeMediaName.Name = "labeMediaName";
+            this.labeMediaName.Size = new System.Drawing.Size(1091, 47);
+            this.labeMediaName.TabIndex = 1;
+            this.labeMediaName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer1
             // 
@@ -472,13 +577,18 @@
             this.ClientSize = new System.Drawing.Size(1091, 740);
             this.Controls.Add(this.containerMain);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMusicPlayer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Music Player";
             this.containerMain.Panel1.ResumeLayout(false);
             this.containerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).EndInit();
             this.containerMain.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -497,7 +607,8 @@
             this.tabSongVideo.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -514,11 +625,6 @@
         private FontAwesome.Sharp.IconButton btnHome;
         private FontAwesome.Sharp.IconButton btnLibrary;
         private FontAwesome.Sharp.IconButton btnFavorite;
-        private System.Windows.Forms.Label labelMusic;
-        private System.Windows.Forms.TabControl tabSongVideo;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listSongs;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -529,6 +635,17 @@
         private FontAwesome.Sharp.IconButton btnFavVideos;
         private FontAwesome.Sharp.IconButton btnFavSongs;
         private FontAwesome.Sharp.IconButton btnAddVideo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TabControl tabSongVideo;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListBox listSongs;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ListBox listVideos;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private FontAwesome.Sharp.IconButton btnBack;
+        private FontAwesome.Sharp.IconButton btnPlay;
+        private FontAwesome.Sharp.IconButton btnNext;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label labeMediaName;
     }
 }

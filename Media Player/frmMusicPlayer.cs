@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Media_Player.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 using WMPLib;
 using MusicConsts = Media_Player.MusicExtensionFilterConsts;
 using VideoConsts = Media_Player.VideoExtensionFilterConsts;
@@ -21,9 +24,9 @@ namespace Media_Player
         private readonly string PLAYLIST_FAV_SONGS = "Favorite songs";
         private readonly string PLAYLIST_FAV_VIDEOS = "Favorite videos";
         IWMPPlaylist playlistAllSongs, playlistAllVideos, playlistFavSongs, playlistFavVideos;
-        List<string> lstMusicPaths, lstVideoPaths;
         private bool isLibraryExpanded = false;
         private bool isFavoriteExpanded = false;
+        private bool isPlaying = false;
         private List<string> MusicFileExtensions = new List<string>
         {
             MusicConsts.MovingPicturesExpertsGroup,
@@ -44,7 +47,8 @@ namespace Media_Player
             Music,
             Video
         }
-
+        private List<Media> listSongData = new List<Media>();
+        private List<Media> listVideoData = new List<Media>();
         public frmMusicPlayer()
         {
             InitializeComponent();
@@ -54,6 +58,7 @@ namespace Media_Player
 
         private void Init()
         {
+            this.axWindowsMediaPlayer.uiMode = "none";
             playlistAllSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_ALL_SONGS);
             playlistAllVideos = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_ALL_VIDEOS);
             playlistFavSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_FAV_SONGS);
@@ -63,8 +68,8 @@ namespace Media_Player
 
         private void LoadData()
         {
-            lstMusicPaths = new List<string>();
-            lstVideoPaths = new List<string>();
+            this.listSongData = new List<Media>();
+            this.listVideoData = new List<Media>();
         }
 
         private void btnFavorite_Click(object sender, EventArgs e)
@@ -81,7 +86,7 @@ namespace Media_Player
 
             // Update playlist dang phat
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
-            axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
+            this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
         }
 
         private void btnAddVideo_Click(object sender, EventArgs e)
@@ -90,7 +95,7 @@ namespace Media_Player
 
             // Update playlist dang phat
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
-            axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
+            this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
         }
 
         private void btnFavSongs_Click(object sender, EventArgs e)
@@ -113,29 +118,71 @@ namespace Media_Player
 
         private void tabSongVideo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (tabSongVideo.SelectedIndex)
+            switch (this.tabSongVideo.SelectedIndex)
             {
                 case (int)TabMedia.Music:
-                    axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
+                    this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
                     break;
                 case (int)TabMedia.Video:
-                    axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
+                    this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
                     break;
             }
         }
 
-        private void btnHome_Click_1(object sender, EventArgs e)
+        private void btnHome_Click(object sender, EventArgs e)
         {
+
         }
 
         private void listSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer.URL = lstMusicPaths[listSongs.SelectedIndex];
+            int index = this.listSongs.SelectedIndex;
+
+            if (index >= 0 && index < playlistAllSongs.count)
+            {
+                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllSongs.Item[index]);
+                //this.axWindowsMediaPlayer.URL = listSongData[index].FilePath;
+            }
+        }
+
+        private void axWindowsMediaPlayer_CurrentItemChange(object sender, AxWMPLib._WMPOCXEvents_CurrentItemChangeEvent e)
+        {
+            this.labeMediaName.Text = this.axWindowsMediaPlayer.currentMedia.name;
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            this.isPlaying = !this.isPlaying;
+            if (this.isPlaying)
+            {
+                this.btnPlay.IconChar = FontAwesome.Sharp.IconChar.Pause;
+                this.axWindowsMediaPlayer.Ctlcontrols.play();
+            }    
+            else
+            {
+                this.btnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
+                this.axWindowsMediaPlayer.Ctlcontrols.pause();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            this.axWindowsMediaPlayer.Ctlcontrols.next();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.axWindowsMediaPlayer.Ctlcontrols.previous();
         }
 
         private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer.URL = lstVideoPaths[listVideos.SelectedIndex];
+            int index = this.listVideos.SelectedIndex;
+            if (index >= 0 && index < playlistAllVideos.count)
+            {
+                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllVideos.Item[index]);
+                //this.axWindowsMediaPlayer.URL = listVideoData[index].FilePath;
+            }
         }
 
         private void ChooseMusic()
@@ -149,21 +196,29 @@ namespace Media_Player
             {
                 // Get the selected files
                 string[] files = dialog.FileNames;
-                // them danh sach cac file vua chon vao list paths
-                lstMusicPaths.AddRange(files);
-                // loc bo nhung file trùng
-                lstMusicPaths = lstMusicPaths.Distinct().ToList();
-                // xoa tat ca file dang hien thi tren giao dien
-                listSongs.Items.Clear();
-                // them cac file trong list paths vao giao dien listBox
-                listSongs.Items.AddRange(lstMusicPaths.ToArray());
-                // cap nhat danh sach bai hat vao playlist AllSongs
-                axWindowsMediaPlayer.playlistCollection.remove(playlistAllSongs);
-                lstMusicPaths.ForEach(path =>
+
+                // Xóa danh sách phát hiện tại
+                this.axWindowsMediaPlayer.playlistCollection.remove(playlistAllSongs);
+
+                foreach (string file in files)
                 {
-                    var mediaItem = axWindowsMediaPlayer.newMedia(path);
-                    playlistAllSongs.appendItem(mediaItem);
-                });
+                    Media media = new Media()
+                    {
+                        FilePath = file,
+                        Name = System.IO.Path.GetFileNameWithoutExtension(file),
+                    };
+                    this.listSongData.Add(media);
+
+                    // Thêm bài hát vào danh sách phát
+                    var mediaItem = this.axWindowsMediaPlayer.newMedia(file);
+                    this.playlistAllSongs.appendItem(mediaItem);
+                }
+
+                // Xóa các tên bài hát đang hiển thị trên giao diện
+                this.listSongs.Items.Clear();
+
+                // Cập nhật lại danh sách tên các bài hát
+                this.listSongs.Items.AddRange(this.listSongData.ToArray());
             }
         }
 
@@ -178,21 +233,28 @@ namespace Media_Player
             {
                 // Get the selected files
                 string[] files = dialog.FileNames;
-                // them danh sach cac file vua chon vao list paths
-                lstVideoPaths.AddRange(files);
-                // loc bo nhung file trùng
-                lstVideoPaths = lstVideoPaths.Distinct().ToList();
-                // xoa tat ca file dang hien thi tren giao dien
-                listVideos.Items.Clear();
-                // them cac file trong list paths vao giao dien listBox
-                listVideos.Items.AddRange(lstVideoPaths.ToArray());
-                // cap nhat danh sach bai hat vao playlist AllSongs
-                axWindowsMediaPlayer.playlistCollection.remove(playlistAllVideos);
-                lstVideoPaths.ForEach(path =>
+
+                // Xóa tất cả video có trong playlist hiện tại
+                this.axWindowsMediaPlayer.playlistCollection.remove(playlistAllVideos);
+
+                foreach (string filePath in files)
                 {
-                    var mediaItem = axWindowsMediaPlayer.newMedia(path);
-                    playlistAllVideos.appendItem(mediaItem);
-                });
+                    Media media = new Media()
+                    {
+                        FilePath = filePath,
+                        Name = System.IO.Path.GetFileNameWithoutExtension(filePath),
+                    };
+                    this.listVideoData.Add(media);
+
+                    var mediaItem = axWindowsMediaPlayer.newMedia(filePath);
+                    this.playlistAllVideos.appendItem(mediaItem);
+                }
+
+                // xoa tat ca filePath dang hien thi tren giao dien
+                this.listVideos.Items.Clear();
+
+                // them cac filePath trong list paths vao giao dien listBox
+                this.listVideos.Items.AddRange(this.listVideoData.ToArray());
             }
         }
     }
