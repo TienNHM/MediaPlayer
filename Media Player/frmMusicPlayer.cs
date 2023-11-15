@@ -89,6 +89,12 @@ namespace Media_Player
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
             this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
 
+            // Update giao diện hiển thị
+            if (this.listSongs.Items.Count > 0)
+            {
+                this.listSongs.SelectedIndex = 0;
+            }
+
             // Update icon playing
             this.isPlaying = true;
             this.PlayingStateChange();
@@ -101,6 +107,12 @@ namespace Media_Player
             // Update playlist dang phat
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
             this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
+
+            // Update giao diện hiển thị
+            if (this.listVideos.Items.Count > 0)
+            {
+                this.listVideos.SelectedIndex = 0;
+            }
 
             // Update icon playing
             this.isPlaying = true;

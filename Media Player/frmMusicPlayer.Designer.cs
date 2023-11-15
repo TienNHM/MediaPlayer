@@ -447,11 +447,11 @@
             this.listSongs.BackColor = System.Drawing.Color.LightBlue;
             this.listSongs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listSongs.ForeColor = System.Drawing.SystemColors.Control;
+            this.listSongs.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listSongs.ForeColor = System.Drawing.Color.DarkCyan;
             this.listSongs.FormattingEnabled = true;
             this.listSongs.HorizontalScrollbar = true;
-            this.listSongs.ItemHeight = 29;
+            this.listSongs.ItemHeight = 35;
             this.listSongs.Location = new System.Drawing.Point(3, 3);
             this.listSongs.Name = "listSongs";
             this.listSongs.Size = new System.Drawing.Size(888, 576);
@@ -465,10 +465,10 @@
             this.tabVideos.Controls.Add(this.listVideos);
             this.tabVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabVideos.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabVideos.Location = new System.Drawing.Point(4, 37);
+            this.tabVideos.Location = new System.Drawing.Point(4, 44);
             this.tabVideos.Name = "tabVideos";
             this.tabVideos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVideos.Size = new System.Drawing.Size(894, 589);
+            this.tabVideos.Size = new System.Drawing.Size(894, 582);
             this.tabVideos.TabIndex = 1;
             this.tabVideos.Text = "Videos";
             // 
@@ -477,14 +477,14 @@
             this.listVideos.BackColor = System.Drawing.Color.LightBlue;
             this.listVideos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listVideos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listVideos.ForeColor = System.Drawing.SystemColors.Control;
+            this.listVideos.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listVideos.ForeColor = System.Drawing.Color.DarkCyan;
             this.listVideos.FormattingEnabled = true;
             this.listVideos.HorizontalScrollbar = true;
-            this.listVideos.ItemHeight = 29;
+            this.listVideos.ItemHeight = 35;
             this.listVideos.Location = new System.Drawing.Point(3, 3);
             this.listVideos.Name = "listVideos";
-            this.listVideos.Size = new System.Drawing.Size(888, 583);
+            this.listVideos.Size = new System.Drawing.Size(888, 576);
             this.listVideos.TabIndex = 0;
             this.listVideos.SelectedIndexChanged += new System.EventHandler(this.listVideos_SelectedIndexChanged);
             // 
