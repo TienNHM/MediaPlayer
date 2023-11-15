@@ -48,9 +48,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.tabSongVideo = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSongs = new System.Windows.Forms.TabPage();
             this.listSongs = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabVideos = new System.Windows.Forms.TabPage();
             this.listVideos = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -59,6 +59,8 @@
             this.btnNext = new FontAwesome.Sharp.IconButton();
             this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnSortAsc = new FontAwesome.Sharp.IconButton();
+            this.btnSortDesc = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -76,8 +78,8 @@
             this.panelHome.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabSongVideo.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabSongs.SuspendLayout();
+            this.tabVideos.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -189,7 +191,7 @@
             this.panelFavorite.Controls.Add(this.btnFavSongs);
             this.panelFavorite.Controls.Add(this.btnFavorite);
             this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelFavorite.Location = new System.Drawing.Point(3, 297);
+            this.panelFavorite.Location = new System.Drawing.Point(3, 373);
             this.panelFavorite.Name = "panelFavorite";
             this.panelFavorite.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.panelFavorite.Size = new System.Drawing.Size(159, 147);
@@ -268,6 +270,8 @@
             // panelLibrary
             // 
             this.panelLibrary.AutoSize = true;
+            this.panelLibrary.Controls.Add(this.btnSortDesc);
+            this.panelLibrary.Controls.Add(this.btnSortAsc);
             this.panelLibrary.Controls.Add(this.btnAddVideo);
             this.panelLibrary.Controls.Add(this.btnAddMusic);
             this.panelLibrary.Controls.Add(this.btnLibrary);
@@ -275,7 +279,7 @@
             this.panelLibrary.Location = new System.Drawing.Point(3, 144);
             this.panelLibrary.Name = "panelLibrary";
             this.panelLibrary.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelLibrary.Size = new System.Drawing.Size(159, 147);
+            this.panelLibrary.Size = new System.Drawing.Size(159, 223);
             this.panelLibrary.TabIndex = 6;
             // 
             // btnAddVideo
@@ -409,60 +413,78 @@
             // 
             // tabSongVideo
             // 
-            this.tabSongVideo.Controls.Add(this.tabPage1);
-            this.tabSongVideo.Controls.Add(this.tabPage2);
+            this.tabSongVideo.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabSongVideo.Controls.Add(this.tabSongs);
+            this.tabSongVideo.Controls.Add(this.tabVideos);
             this.tabSongVideo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabSongVideo.ItemSize = new System.Drawing.Size(120, 40);
             this.tabSongVideo.Location = new System.Drawing.Point(0, 0);
+            this.tabSongVideo.Multiline = true;
             this.tabSongVideo.Name = "tabSongVideo";
             this.tabSongVideo.SelectedIndex = 0;
             this.tabSongVideo.Size = new System.Drawing.Size(902, 630);
+            this.tabSongVideo.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabSongVideo.TabIndex = 0;
             this.tabSongVideo.SelectedIndexChanged += new System.EventHandler(this.tabSongVideo_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabSongs
             // 
-            this.tabPage1.Controls.Add(this.listSongs);
-            this.tabPage1.Location = new System.Drawing.Point(4, 34);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(894, 592);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Songs";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSongs.AutoScroll = true;
+            this.tabSongs.BackColor = System.Drawing.Color.LightBlue;
+            this.tabSongs.Controls.Add(this.listSongs);
+            this.tabSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabSongs.ForeColor = System.Drawing.Color.SteelBlue;
+            this.tabSongs.Location = new System.Drawing.Point(4, 44);
+            this.tabSongs.Name = "tabSongs";
+            this.tabSongs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSongs.Size = new System.Drawing.Size(894, 582);
+            this.tabSongs.TabIndex = 0;
+            this.tabSongs.Text = "Songs";
             // 
             // listSongs
             // 
+            this.listSongs.BackColor = System.Drawing.Color.LightBlue;
+            this.listSongs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listSongs.ForeColor = System.Drawing.SystemColors.Control;
             this.listSongs.FormattingEnabled = true;
+            this.listSongs.HorizontalScrollbar = true;
             this.listSongs.ItemHeight = 29;
             this.listSongs.Location = new System.Drawing.Point(3, 3);
             this.listSongs.Name = "listSongs";
-            this.listSongs.Size = new System.Drawing.Size(888, 586);
+            this.listSongs.Size = new System.Drawing.Size(888, 576);
             this.listSongs.TabIndex = 0;
             this.listSongs.SelectedIndexChanged += new System.EventHandler(this.listSongs_SelectedIndexChanged);
             // 
-            // tabPage2
+            // tabVideos
             // 
-            this.tabPage2.Controls.Add(this.listVideos);
-            this.tabPage2.Location = new System.Drawing.Point(4, 34);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(894, 592);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Videos";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabVideos.AutoScroll = true;
+            this.tabVideos.BackColor = System.Drawing.Color.LightBlue;
+            this.tabVideos.Controls.Add(this.listVideos);
+            this.tabVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabVideos.ForeColor = System.Drawing.Color.SteelBlue;
+            this.tabVideos.Location = new System.Drawing.Point(4, 37);
+            this.tabVideos.Name = "tabVideos";
+            this.tabVideos.Padding = new System.Windows.Forms.Padding(3);
+            this.tabVideos.Size = new System.Drawing.Size(894, 589);
+            this.tabVideos.TabIndex = 1;
+            this.tabVideos.Text = "Videos";
             // 
             // listVideos
             // 
+            this.listVideos.BackColor = System.Drawing.Color.LightBlue;
+            this.listVideos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listVideos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listVideos.ForeColor = System.Drawing.SystemColors.Control;
             this.listVideos.FormattingEnabled = true;
+            this.listVideos.HorizontalScrollbar = true;
             this.listVideos.ItemHeight = 29;
             this.listVideos.Location = new System.Drawing.Point(3, 3);
             this.listVideos.Name = "listVideos";
-            this.listVideos.Size = new System.Drawing.Size(888, 586);
+            this.listVideos.Size = new System.Drawing.Size(888, 583);
             this.listVideos.TabIndex = 0;
             this.listVideos.SelectedIndexChanged += new System.EventHandler(this.listVideos_SelectedIndexChanged);
             // 
@@ -570,6 +592,54 @@
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
+            // btnSortAsc
+            // 
+            this.btnSortAsc.AutoSize = true;
+            this.btnSortAsc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSortAsc.FlatAppearance.BorderSize = 0;
+            this.btnSortAsc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSortAsc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnSortAsc.ForeColor = System.Drawing.Color.White;
+            this.btnSortAsc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUp;
+            this.btnSortAsc.IconColor = System.Drawing.Color.White;
+            this.btnSortAsc.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSortAsc.IconSize = 32;
+            this.btnSortAsc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSortAsc.Location = new System.Drawing.Point(0, 137);
+            this.btnSortAsc.Name = "btnSortAsc";
+            this.btnSortAsc.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSortAsc.Size = new System.Drawing.Size(159, 38);
+            this.btnSortAsc.TabIndex = 4;
+            this.btnSortAsc.Text = "Sort Asc";
+            this.btnSortAsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSortAsc.UseVisualStyleBackColor = true;
+            this.btnSortAsc.Visible = false;
+            this.btnSortAsc.Click += new System.EventHandler(this.btnSortAsc_Click);
+            // 
+            // btnSortDesc
+            // 
+            this.btnSortDesc.AutoSize = true;
+            this.btnSortDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSortDesc.FlatAppearance.BorderSize = 0;
+            this.btnSortDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSortDesc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnSortDesc.ForeColor = System.Drawing.Color.White;
+            this.btnSortDesc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUpAlt;
+            this.btnSortDesc.IconColor = System.Drawing.Color.White;
+            this.btnSortDesc.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnSortDesc.IconSize = 32;
+            this.btnSortDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSortDesc.Location = new System.Drawing.Point(0, 175);
+            this.btnSortDesc.Name = "btnSortDesc";
+            this.btnSortDesc.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnSortDesc.Size = new System.Drawing.Size(159, 38);
+            this.btnSortDesc.TabIndex = 5;
+            this.btnSortDesc.Text = "Sort Desc";
+            this.btnSortDesc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSortDesc.UseVisualStyleBackColor = true;
+            this.btnSortDesc.Visible = false;
+            this.btnSortDesc.Click += new System.EventHandler(this.btnSortDesc_Click);
+            // 
             // frmMusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -605,8 +675,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabSongVideo.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabSongs.ResumeLayout(false);
+            this.tabVideos.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -637,9 +707,9 @@
         private FontAwesome.Sharp.IconButton btnAddVideo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TabControl tabSongVideo;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabSongs;
         private System.Windows.Forms.ListBox listSongs;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabVideos;
         private System.Windows.Forms.ListBox listVideos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private FontAwesome.Sharp.IconButton btnBack;
@@ -647,5 +717,7 @@
         private FontAwesome.Sharp.IconButton btnNext;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labeMediaName;
+        private FontAwesome.Sharp.IconButton btnSortDesc;
+        private FontAwesome.Sharp.IconButton btnSortAsc;
     }
 }

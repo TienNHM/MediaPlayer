@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -87,6 +88,10 @@ namespace Media_Player
             // Update playlist dang phat
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
             this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
+
+            // Update icon playing
+            this.isPlaying = true;
+            this.PlayingStateChange();
         }
 
         private void btnAddVideo_Click(object sender, EventArgs e)
@@ -96,6 +101,10 @@ namespace Media_Player
             // Update playlist dang phat
             this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
             this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
+
+            // Update icon playing
+            this.isPlaying = true;
+            this.PlayingStateChange();
         }
 
         private void btnFavSongs_Click(object sender, EventArgs e)
@@ -114,6 +123,8 @@ namespace Media_Player
 
             this.btnAddVideo.Visible = this.isLibraryExpanded;
             this.btnAddMusic.Visible = this.isLibraryExpanded;
+            this.btnSortAsc.Visible = this.isLibraryExpanded;
+            this.btnSortDesc.Visible = this.isLibraryExpanded;
         }
 
         private void tabSongVideo_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,11 +164,16 @@ namespace Media_Player
         private void btnPlay_Click(object sender, EventArgs e)
         {
             this.isPlaying = !this.isPlaying;
+            this.PlayingStateChange();
+        }
+
+        private void PlayingStateChange()
+        {
             if (this.isPlaying)
             {
                 this.btnPlay.IconChar = FontAwesome.Sharp.IconChar.Pause;
                 this.axWindowsMediaPlayer.Ctlcontrols.play();
-            }    
+            }
             else
             {
                 this.btnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
@@ -173,6 +189,36 @@ namespace Media_Player
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.axWindowsMediaPlayer.Ctlcontrols.previous();
+        }
+
+        private void btnSortAsc_Click(object sender, EventArgs e)
+        {
+            // Sort data tăng dần
+            this.listSongData.Sort((x, y) => x.Name.CompareTo(y.Name));
+            this.listVideoData.Sort((x, y) => x.Name.CompareTo(y.Name));
+
+            // Sort playlist tăng dần
+            SortPlaylist(ref this.playlistAllSongs, SortDirection.Asc);
+            SortPlaylist(ref this.playlistAllVideos, SortDirection.Asc);
+
+            // Cập nhật giao diện
+            this.UpdateListSongsView();
+            this.UpdateListVideosView();
+        }
+
+        private void btnSortDesc_Click(object sender, EventArgs e)
+        {
+            // Sort data giảm gần
+            this.listSongData.Sort((x, y) => y.Name.CompareTo(x.Name));
+            this.listVideoData.Sort((x, y) => y.Name.CompareTo(x.Name));
+
+            // Sort playlist giảm dần
+            SortPlaylist(ref this.playlistAllSongs, SortDirection.Desc);
+            SortPlaylist(ref this.playlistAllVideos, SortDirection.Desc);
+
+            // Cập nhật giao diện
+            this.UpdateListSongsView();
+            this.UpdateListVideosView();
         }
 
         private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,24 +248,32 @@ namespace Media_Player
 
                 foreach (string file in files)
                 {
-                    Media media = new Media()
-                    {
-                        FilePath = file,
-                        Name = System.IO.Path.GetFileNameWithoutExtension(file),
-                    };
-                    this.listSongData.Add(media);
-
                     // Thêm bài hát vào danh sách phát
                     var mediaItem = this.axWindowsMediaPlayer.newMedia(file);
                     this.playlistAllSongs.appendItem(mediaItem);
+
+                    Media media = new Media()
+                    {
+                        FilePath = file,
+                        Name = mediaItem.name,
+                    };
+                    this.listSongData.Add(media);
                 }
 
-                // Xóa các tên bài hát đang hiển thị trên giao diện
-                this.listSongs.Items.Clear();
-
-                // Cập nhật lại danh sách tên các bài hát
-                this.listSongs.Items.AddRange(this.listSongData.ToArray());
+                this.UpdateListSongsView();
             }
+        }
+
+        /// <summary>
+        /// Cập nhật lại danh sách bài hát tren giao diện
+        /// </summary>
+        private void UpdateListSongsView()
+        {
+            // Xóa các tên bài hát đang hiển thị trên giao diện
+            this.listSongs.Items.Clear();
+
+            // Cập nhật lại danh sách tên các bài hát dựa vào listSongData
+            this.listSongs.Items.AddRange(this.listSongData.ToArray());
         }
 
         private void ChooseVideo()
@@ -250,11 +304,50 @@ namespace Media_Player
                     this.playlistAllVideos.appendItem(mediaItem);
                 }
 
-                // xoa tat ca filePath dang hien thi tren giao dien
-                this.listVideos.Items.Clear();
+                this.UpdateListVideosView();
+            }
+        }
 
-                // them cac filePath trong list paths vao giao dien listBox
-                this.listVideos.Items.AddRange(this.listVideoData.ToArray());
+        /// <summary>
+        /// Cập nhật lại danh sách video trên giao diện
+        /// </summary>
+        private void UpdateListVideosView()
+        {
+            // Xóa tất cả tên các video hiện có trên giao diện
+            this.listVideos.Items.Clear();
+
+            // Cập nhật lại tên các video dựa vào listVideoData
+            this.listVideos.Items.AddRange(this.listVideoData.ToArray());
+        }
+
+        public enum SortDirection
+        {
+            Asc,
+            Desc,
+        }
+
+        public static void SortPlaylist(ref IWMPPlaylist playlist, SortDirection sortDirection)
+        {
+            List<IWMPMedia> listMedias = new List<IWMPMedia>();
+            for (int i = 0; i < playlist.count; i++)
+            {
+                listMedias.Add(playlist.Item[i]);
+            }
+
+            switch (sortDirection)
+            {
+                case SortDirection.Asc:
+                    listMedias.Sort((x, y) => x.name.CompareTo(y.name));
+                    break;
+                case SortDirection.Desc:
+                    listMedias.Sort((x, y) => y.name.CompareTo(x.name));
+                    break;
+            }
+            
+            playlist.clear();
+            foreach (IWMPMedia media in listMedias)
+            {
+                playlist.appendItem(media);
             }
         }
     }
