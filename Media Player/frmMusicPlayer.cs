@@ -1,4 +1,5 @@
 ﻿using Media_Player.Entity;
+using Media_Player.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -206,31 +207,51 @@ namespace Media_Player
         private void btnSortAsc_Click(object sender, EventArgs e)
         {
             // Sort data tăng dần
-            this.listSongData.Sort((x, y) => x.Name.CompareTo(y.Name));
-            this.listVideoData.Sort((x, y) => x.Name.CompareTo(y.Name));
+            SortUtils.SortMedia(this.listSongData, SortDirection.Asc);
+            SortUtils.SortMedia(this.listVideoData, SortDirection.Asc);
 
             // Sort playlist tăng dần
-            SortPlaylist(ref this.playlistAllSongs, SortDirection.Asc);
-            SortPlaylist(ref this.playlistAllVideos, SortDirection.Asc);
+            SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Asc);
+            SortUtils.SortPlaylist(this.playlistAllVideos, SortDirection.Asc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
             this.UpdateListVideosView();
+
+            // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllVideos;
+            }
+            else
+            {
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
+            }
         }
 
         private void btnSortDesc_Click(object sender, EventArgs e)
         {
-            // Sort data giảm gần
-            this.listSongData.Sort((x, y) => y.Name.CompareTo(x.Name));
-            this.listVideoData.Sort((x, y) => y.Name.CompareTo(x.Name));
+            // Sort data giảm dần
+            SortUtils.SortMedia(this.listSongData, SortDirection.Desc);
+            SortUtils.SortMedia(this.listVideoData, SortDirection.Desc);
 
             // Sort playlist giảm dần
-            SortPlaylist(ref this.playlistAllSongs, SortDirection.Desc);
-            SortPlaylist(ref this.playlistAllVideos, SortDirection.Desc);
+            SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Desc);
+            SortUtils.SortPlaylist(this.playlistAllVideos, SortDirection.Desc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
             this.UpdateListVideosView();
+
+            // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllVideos;
+            }
+            else
+            {
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
+            }
         }
 
         private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
@@ -330,37 +351,6 @@ namespace Media_Player
 
             // Cập nhật lại tên các video dựa vào listVideoData
             this.listVideos.Items.AddRange(this.listVideoData.ToArray());
-        }
-
-        public enum SortDirection
-        {
-            Asc,
-            Desc,
-        }
-
-        public static void SortPlaylist(ref IWMPPlaylist playlist, SortDirection sortDirection)
-        {
-            List<IWMPMedia> listMedias = new List<IWMPMedia>();
-            for (int i = 0; i < playlist.count; i++)
-            {
-                listMedias.Add(playlist.Item[i]);
-            }
-
-            switch (sortDirection)
-            {
-                case SortDirection.Asc:
-                    listMedias.Sort((x, y) => x.name.CompareTo(y.name));
-                    break;
-                case SortDirection.Desc:
-                    listMedias.Sort((x, y) => y.name.CompareTo(x.name));
-                    break;
-            }
-            
-            playlist.clear();
-            foreach (IWMPMedia media in listMedias)
-            {
-                playlist.appendItem(media);
-            }
         }
     }
 }

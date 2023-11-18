@@ -8,12 +8,45 @@ namespace Media_Player.Entity
 {
     public class Media
     {
+        /// <summary>
+        /// Tên video/bài hát
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Đường dẫn đến file
+        /// </summary>
         public string FilePath { get; set; }
+
+        /// <summary>
+        /// Loại media: Video/Audio
+        /// </summary>
+        public MediaType MediaType { get; set; }
 
         public override string ToString()
         {
             return this.Name;
         }
+
+        /// <summary>
+        /// So sánh media1 và media2, không phân biệt chữ hoa/chữ thường
+        /// </summary>
+        /// <param name="media1"></param>
+        /// <param name="media2"></param>
+        /// <returns>
+        /// value < 0 nếu media1.Name < media2.Name
+        /// value = 0 nếu media1.Name = media2.Name
+        /// value > 0 nếu media1.Name > media2.Name
+        /// </returns>
+        public static int SoSanh(Media media1, Media media2)
+        {
+            return String.Compare(media1.Name, media2.Name, ignoreCase: true);
+        }
+    }
+
+    public enum MediaType
+    {
+        Video,
+        Audio
     }
 }
