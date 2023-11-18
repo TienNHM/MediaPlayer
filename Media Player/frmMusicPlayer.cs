@@ -160,7 +160,9 @@ namespace Media_Player
 
         private void listSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = this.listSongs.SelectedIndex;
+            Media selectedItem = this.listSongs.SelectedItem as Media;
+
+            int index = this.listSongData.FindIndex(song => song.Name == selectedItem.Name);
 
             if (index >= 0 && index < playlistAllSongs.count)
             {
@@ -256,7 +258,10 @@ namespace Media_Player
 
         private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = this.listVideos.SelectedIndex;
+            Media selectedItem = this.listVideos.SelectedItem as Media;
+
+            int index = this.listVideoData.FindIndex(song => song.Name == selectedItem.Name);
+
             if (index >= 0 && index < playlistAllVideos.count)
             {
                 this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllVideos.Item[index]);
@@ -295,6 +300,44 @@ namespace Media_Player
 
                 this.UpdateListSongsView();
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string query = txtSearch.Text;
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                List<Media> mediaList = Search(this.listVideoData, query);
+                this.listVideos.DataSource = mediaList;
+            }
+            else
+            {
+                List<Media> mediaList = Search(this.listSongData, query);
+                this.listSongs.DataSource = mediaList;
+            }
+        }
+
+        private List<Media> Search(List<Media> medias, string query)
+        {
+            // Chuẩn hóa text dùng để tìm kiếm
+            query = StringUtils.RemoveSign4VietnameseString(query.ToLower().Trim());
+
+            List<Media> result = new List<Media>();
+            for (int i = 0; i < medias.Count; i++)
+            {
+                // Chuẩn hóa Name: loại bỏ dấu cách thừa, chuyển sang chữ thường và tiếng Việt không dấu
+                string name = medias[i].Name.ToLower().Trim();
+                name = StringUtils.RemoveSign4VietnameseString(name);
+
+                // Kiểm tra xem Name của media có chứa từ trong query không
+                // Nếu có, thêm vào kết quả trả về
+                if (name.Contains(query) == true)
+                {
+                    result.Add(medias[i]);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

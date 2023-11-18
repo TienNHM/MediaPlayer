@@ -40,6 +40,8 @@
             this.btnFavSongs = new FontAwesome.Sharp.IconButton();
             this.btnFavorite = new FontAwesome.Sharp.IconButton();
             this.panelLibrary = new System.Windows.Forms.Panel();
+            this.btnSortDesc = new FontAwesome.Sharp.IconButton();
+            this.btnSortAsc = new FontAwesome.Sharp.IconButton();
             this.btnAddVideo = new FontAwesome.Sharp.IconButton();
             this.btnAddMusic = new FontAwesome.Sharp.IconButton();
             this.btnLibrary = new FontAwesome.Sharp.IconButton();
@@ -59,8 +61,6 @@
             this.btnNext = new FontAwesome.Sharp.IconButton();
             this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnSortAsc = new FontAwesome.Sharp.IconButton();
-            this.btnSortDesc = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -91,6 +91,7 @@
             this.containerMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.containerMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.containerMain.Location = new System.Drawing.Point(0, 0);
+            this.containerMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.containerMain.Name = "containerMain";
             this.containerMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -102,8 +103,9 @@
             // 
             this.containerMain.Panel2.BackColor = System.Drawing.Color.Gray;
             this.containerMain.Panel2.Controls.Add(this.panel2);
-            this.containerMain.Size = new System.Drawing.Size(1091, 740);
-            this.containerMain.SplitterDistance = 636;
+            this.containerMain.Size = new System.Drawing.Size(818, 601);
+            this.containerMain.SplitterDistance = 498;
+            this.containerMain.SplitterWidth = 3;
             this.containerMain.TabIndex = 0;
             // 
             // panel1
@@ -112,8 +114,9 @@
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1091, 636);
+            this.panel1.Size = new System.Drawing.Size(818, 498);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -125,42 +128,46 @@
             this.tableLayoutPanel2.Controls.Add(this.splitContainer2, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1091, 636);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(818, 498);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // axWindowsMediaPlayer
             // 
             this.axWindowsMediaPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axWindowsMediaPlayer.Enabled = true;
-            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(1100, 3);
+            this.axWindowsMediaPlayer.Location = new System.Drawing.Point(824, 2);
+            this.axWindowsMediaPlayer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
             this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(253, 630);
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(253, 494);
             this.axWindowsMediaPlayer.TabIndex = 1;
             this.axWindowsMediaPlayer.CurrentItemChange += new AxWMPLib._WMPOCXEvents_CurrentItemChangeEventHandler(this.axWindowsMediaPlayer_CurrentItemChange);
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Location = new System.Drawing.Point(2, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(72)))), ((int)(((byte)(107)))));
             this.splitContainer2.Panel1.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Panel1.Padding = new System.Windows.Forms.Padding(10);
+            this.splitContainer2.Panel1.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(214)))), ((int)(((byte)(198)))));
             this.splitContainer2.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainer2.Panel2.Controls.Add(this.tabSongVideo);
-            this.splitContainer2.Size = new System.Drawing.Size(1091, 630);
-            this.splitContainer2.SplitterDistance = 185;
+            this.splitContainer2.Size = new System.Drawing.Size(818, 494);
+            this.splitContainer2.SplitterDistance = 217;
+            this.splitContainer2.SplitterWidth = 3;
             this.splitContainer2.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -173,7 +180,8 @@
             this.tableLayoutPanel1.Controls.Add(this.panelHome, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -181,7 +189,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(165, 610);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(201, 478);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // panelFavorite
@@ -191,10 +199,11 @@
             this.panelFavorite.Controls.Add(this.btnFavSongs);
             this.panelFavorite.Controls.Add(this.btnFavorite);
             this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelFavorite.Location = new System.Drawing.Point(3, 373);
+            this.panelFavorite.Location = new System.Drawing.Point(2, 344);
+            this.panelFavorite.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelFavorite.Name = "panelFavorite";
-            this.panelFavorite.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelFavorite.Size = new System.Drawing.Size(159, 147);
+            this.panelFavorite.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.panelFavorite.Size = new System.Drawing.Size(197, 133);
             this.panelFavorite.TabIndex = 6;
             // 
             // btnFavVideos
@@ -210,10 +219,11 @@
             this.btnFavVideos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFavVideos.IconSize = 32;
             this.btnFavVideos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFavVideos.Location = new System.Drawing.Point(0, 99);
+            this.btnFavVideos.Location = new System.Drawing.Point(0, 87);
+            this.btnFavVideos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFavVideos.Name = "btnFavVideos";
-            this.btnFavVideos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnFavVideos.Size = new System.Drawing.Size(159, 38);
+            this.btnFavVideos.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnFavVideos.Size = new System.Drawing.Size(197, 38);
             this.btnFavVideos.TabIndex = 4;
             this.btnFavVideos.Text = "Favorite videos";
             this.btnFavVideos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -234,10 +244,11 @@
             this.btnFavSongs.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFavSongs.IconSize = 32;
             this.btnFavSongs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFavSongs.Location = new System.Drawing.Point(0, 61);
+            this.btnFavSongs.Location = new System.Drawing.Point(0, 49);
+            this.btnFavSongs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFavSongs.Name = "btnFavSongs";
-            this.btnFavSongs.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnFavSongs.Size = new System.Drawing.Size(159, 38);
+            this.btnFavSongs.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnFavSongs.Size = new System.Drawing.Size(197, 38);
             this.btnFavSongs.TabIndex = 1;
             this.btnFavSongs.Text = "Favorite songs";
             this.btnFavSongs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -257,9 +268,10 @@
             this.btnFavorite.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnFavorite.IconSize = 32;
             this.btnFavorite.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFavorite.Location = new System.Drawing.Point(0, 10);
+            this.btnFavorite.Location = new System.Drawing.Point(0, 8);
+            this.btnFavorite.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFavorite.Name = "btnFavorite";
-            this.btnFavorite.Size = new System.Drawing.Size(159, 51);
+            this.btnFavorite.Size = new System.Drawing.Size(197, 41);
             this.btnFavorite.TabIndex = 3;
             this.btnFavorite.Text = "FAVORITE";
             this.btnFavorite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -276,11 +288,62 @@
             this.panelLibrary.Controls.Add(this.btnAddMusic);
             this.panelLibrary.Controls.Add(this.btnLibrary);
             this.panelLibrary.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLibrary.Location = new System.Drawing.Point(3, 144);
+            this.panelLibrary.Location = new System.Drawing.Point(2, 131);
+            this.panelLibrary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelLibrary.Name = "panelLibrary";
-            this.panelLibrary.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelLibrary.Size = new System.Drawing.Size(159, 223);
+            this.panelLibrary.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.panelLibrary.Size = new System.Drawing.Size(197, 209);
             this.panelLibrary.TabIndex = 6;
+            // 
+            // btnSortDesc
+            // 
+            this.btnSortDesc.AutoSize = true;
+            this.btnSortDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSortDesc.FlatAppearance.BorderSize = 0;
+            this.btnSortDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSortDesc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnSortDesc.ForeColor = System.Drawing.Color.White;
+            this.btnSortDesc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUpAlt;
+            this.btnSortDesc.IconColor = System.Drawing.Color.White;
+            this.btnSortDesc.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnSortDesc.IconSize = 32;
+            this.btnSortDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSortDesc.Location = new System.Drawing.Point(0, 163);
+            this.btnSortDesc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSortDesc.Name = "btnSortDesc";
+            this.btnSortDesc.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnSortDesc.Size = new System.Drawing.Size(197, 38);
+            this.btnSortDesc.TabIndex = 5;
+            this.btnSortDesc.Text = "Sort Desc";
+            this.btnSortDesc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSortDesc.UseVisualStyleBackColor = true;
+            this.btnSortDesc.Visible = false;
+            this.btnSortDesc.Click += new System.EventHandler(this.btnSortDesc_Click);
+            // 
+            // btnSortAsc
+            // 
+            this.btnSortAsc.AutoSize = true;
+            this.btnSortAsc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSortAsc.FlatAppearance.BorderSize = 0;
+            this.btnSortAsc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSortAsc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnSortAsc.ForeColor = System.Drawing.Color.White;
+            this.btnSortAsc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUp;
+            this.btnSortAsc.IconColor = System.Drawing.Color.White;
+            this.btnSortAsc.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSortAsc.IconSize = 32;
+            this.btnSortAsc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSortAsc.Location = new System.Drawing.Point(0, 125);
+            this.btnSortAsc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSortAsc.Name = "btnSortAsc";
+            this.btnSortAsc.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnSortAsc.Size = new System.Drawing.Size(197, 38);
+            this.btnSortAsc.TabIndex = 4;
+            this.btnSortAsc.Text = "Sort Asc";
+            this.btnSortAsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSortAsc.UseVisualStyleBackColor = true;
+            this.btnSortAsc.Visible = false;
+            this.btnSortAsc.Click += new System.EventHandler(this.btnSortAsc_Click);
             // 
             // btnAddVideo
             // 
@@ -295,10 +358,11 @@
             this.btnAddVideo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddVideo.IconSize = 32;
             this.btnAddVideo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddVideo.Location = new System.Drawing.Point(0, 99);
+            this.btnAddVideo.Location = new System.Drawing.Point(0, 87);
+            this.btnAddVideo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddVideo.Name = "btnAddVideo";
-            this.btnAddVideo.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAddVideo.Size = new System.Drawing.Size(159, 38);
+            this.btnAddVideo.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnAddVideo.Size = new System.Drawing.Size(197, 38);
             this.btnAddVideo.TabIndex = 3;
             this.btnAddVideo.Text = "Add video";
             this.btnAddVideo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -319,10 +383,11 @@
             this.btnAddMusic.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddMusic.IconSize = 32;
             this.btnAddMusic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddMusic.Location = new System.Drawing.Point(0, 61);
+            this.btnAddMusic.Location = new System.Drawing.Point(0, 49);
+            this.btnAddMusic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddMusic.Name = "btnAddMusic";
-            this.btnAddMusic.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAddMusic.Size = new System.Drawing.Size(159, 38);
+            this.btnAddMusic.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btnAddMusic.Size = new System.Drawing.Size(197, 38);
             this.btnAddMusic.TabIndex = 1;
             this.btnAddMusic.Text = "Add music";
             this.btnAddMusic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -342,9 +407,10 @@
             this.btnLibrary.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLibrary.IconSize = 32;
             this.btnLibrary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLibrary.Location = new System.Drawing.Point(0, 10);
+            this.btnLibrary.Location = new System.Drawing.Point(0, 8);
+            this.btnLibrary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLibrary.Name = "btnLibrary";
-            this.btnLibrary.Size = new System.Drawing.Size(159, 51);
+            this.btnLibrary.Size = new System.Drawing.Size(197, 41);
             this.btnLibrary.TabIndex = 2;
             this.btnLibrary.Text = "LIBRARY";
             this.btnLibrary.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -357,10 +423,11 @@
             this.panelHome.AutoSize = true;
             this.panelHome.Controls.Add(this.btnHome);
             this.panelHome.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHome.Location = new System.Drawing.Point(3, 80);
+            this.panelHome.Location = new System.Drawing.Point(2, 73);
+            this.panelHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelHome.Name = "panelHome";
-            this.panelHome.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelHome.Size = new System.Drawing.Size(159, 58);
+            this.panelHome.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.panelHome.Size = new System.Drawing.Size(197, 54);
             this.panelHome.TabIndex = 5;
             // 
             // btnHome
@@ -376,9 +443,10 @@
             this.btnHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnHome.IconSize = 32;
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHome.Location = new System.Drawing.Point(0, 10);
+            this.btnHome.Location = new System.Drawing.Point(0, 8);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(159, 38);
+            this.btnHome.Size = new System.Drawing.Size(197, 38);
             this.btnHome.TabIndex = 1;
             this.btnHome.Text = "HOME";
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -392,10 +460,11 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(159, 71);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.groupBox1.Size = new System.Drawing.Size(197, 67);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -406,10 +475,12 @@
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(10, 27);
+            this.txtSearch.Location = new System.Drawing.Point(8, 25);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(139, 34);
+            this.txtSearch.Size = new System.Drawing.Size(181, 34);
             this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // tabSongVideo
             // 
@@ -420,10 +491,11 @@
             this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabSongVideo.ItemSize = new System.Drawing.Size(120, 40);
             this.tabSongVideo.Location = new System.Drawing.Point(0, 0);
+            this.tabSongVideo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabSongVideo.Multiline = true;
             this.tabSongVideo.Name = "tabSongVideo";
             this.tabSongVideo.SelectedIndex = 0;
-            this.tabSongVideo.Size = new System.Drawing.Size(902, 630);
+            this.tabSongVideo.Size = new System.Drawing.Size(598, 494);
             this.tabSongVideo.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabSongVideo.TabIndex = 0;
             this.tabSongVideo.SelectedIndexChanged += new System.EventHandler(this.tabSongVideo_SelectedIndexChanged);
@@ -436,9 +508,10 @@
             this.tabSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabSongs.ForeColor = System.Drawing.Color.SteelBlue;
             this.tabSongs.Location = new System.Drawing.Point(4, 44);
+            this.tabSongs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabSongs.Name = "tabSongs";
-            this.tabSongs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSongs.Size = new System.Drawing.Size(894, 582);
+            this.tabSongs.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabSongs.Size = new System.Drawing.Size(590, 446);
             this.tabSongs.TabIndex = 0;
             this.tabSongs.Text = "Songs";
             // 
@@ -451,10 +524,11 @@
             this.listSongs.ForeColor = System.Drawing.Color.DarkCyan;
             this.listSongs.FormattingEnabled = true;
             this.listSongs.HorizontalScrollbar = true;
-            this.listSongs.ItemHeight = 35;
-            this.listSongs.Location = new System.Drawing.Point(3, 3);
+            this.listSongs.ItemHeight = 28;
+            this.listSongs.Location = new System.Drawing.Point(2, 2);
+            this.listSongs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listSongs.Name = "listSongs";
-            this.listSongs.Size = new System.Drawing.Size(888, 576);
+            this.listSongs.Size = new System.Drawing.Size(586, 442);
             this.listSongs.TabIndex = 0;
             this.listSongs.SelectedIndexChanged += new System.EventHandler(this.listSongs_SelectedIndexChanged);
             // 
@@ -466,9 +540,10 @@
             this.tabVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabVideos.ForeColor = System.Drawing.Color.SteelBlue;
             this.tabVideos.Location = new System.Drawing.Point(4, 44);
+            this.tabVideos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabVideos.Name = "tabVideos";
-            this.tabVideos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabVideos.Size = new System.Drawing.Size(894, 582);
+            this.tabVideos.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabVideos.Size = new System.Drawing.Size(590, 446);
             this.tabVideos.TabIndex = 1;
             this.tabVideos.Text = "Videos";
             // 
@@ -481,10 +556,11 @@
             this.listVideos.ForeColor = System.Drawing.Color.DarkCyan;
             this.listVideos.FormattingEnabled = true;
             this.listVideos.HorizontalScrollbar = true;
-            this.listVideos.ItemHeight = 35;
-            this.listVideos.Location = new System.Drawing.Point(3, 3);
+            this.listVideos.ItemHeight = 28;
+            this.listVideos.Location = new System.Drawing.Point(2, 2);
+            this.listVideos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listVideos.Name = "listVideos";
-            this.listVideos.Size = new System.Drawing.Size(888, 576);
+            this.listVideos.Size = new System.Drawing.Size(586, 442);
             this.listVideos.TabIndex = 0;
             this.listVideos.SelectedIndexChanged += new System.EventHandler(this.listVideos_SelectedIndexChanged);
             // 
@@ -494,8 +570,9 @@
             this.panel2.Controls.Add(this.labeMediaName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1091, 100);
+            this.panel2.Size = new System.Drawing.Size(818, 100);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel3
@@ -509,11 +586,12 @@
             this.tableLayoutPanel3.Controls.Add(this.btnPlay, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnNext, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 47);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 38);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1091, 53);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(818, 62);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // btnBack
@@ -525,10 +603,10 @@
             this.btnBack.IconColor = System.Drawing.SystemColors.Control;
             this.btnBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnBack.IconSize = 32;
-            this.btnBack.Location = new System.Drawing.Point(20, 10);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnBack.Location = new System.Drawing.Point(15, 8);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(15, 8, 15, 8);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(323, 33);
+            this.btnBack.Size = new System.Drawing.Size(242, 46);
             this.btnBack.TabIndex = 0;
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -542,10 +620,10 @@
             this.btnPlay.IconColor = System.Drawing.SystemColors.Control;
             this.btnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnPlay.IconSize = 32;
-            this.btnPlay.Location = new System.Drawing.Point(383, 10);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnPlay.Location = new System.Drawing.Point(287, 8);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(15, 8, 15, 8);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(323, 33);
+            this.btnPlay.Size = new System.Drawing.Size(242, 46);
             this.btnPlay.TabIndex = 1;
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -559,10 +637,10 @@
             this.btnNext.IconColor = System.Drawing.SystemColors.Control;
             this.btnNext.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnNext.IconSize = 32;
-            this.btnNext.Location = new System.Drawing.Point(746, 10);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnNext.Location = new System.Drawing.Point(559, 8);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(15, 8, 15, 8);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(325, 33);
+            this.btnNext.Size = new System.Drawing.Size(244, 46);
             this.btnNext.TabIndex = 2;
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -574,8 +652,9 @@
             this.labeMediaName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labeMediaName.ForeColor = System.Drawing.Color.MidnightBlue;
             this.labeMediaName.Location = new System.Drawing.Point(0, 0);
+            this.labeMediaName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labeMediaName.Name = "labeMediaName";
-            this.labeMediaName.Size = new System.Drawing.Size(1091, 47);
+            this.labeMediaName.Size = new System.Drawing.Size(818, 38);
             this.labeMediaName.TabIndex = 1;
             this.labeMediaName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -592,63 +671,16 @@
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
-            // btnSortAsc
-            // 
-            this.btnSortAsc.AutoSize = true;
-            this.btnSortAsc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSortAsc.FlatAppearance.BorderSize = 0;
-            this.btnSortAsc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSortAsc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.btnSortAsc.ForeColor = System.Drawing.Color.White;
-            this.btnSortAsc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUp;
-            this.btnSortAsc.IconColor = System.Drawing.Color.White;
-            this.btnSortAsc.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSortAsc.IconSize = 32;
-            this.btnSortAsc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSortAsc.Location = new System.Drawing.Point(0, 137);
-            this.btnSortAsc.Name = "btnSortAsc";
-            this.btnSortAsc.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSortAsc.Size = new System.Drawing.Size(159, 38);
-            this.btnSortAsc.TabIndex = 4;
-            this.btnSortAsc.Text = "Sort Asc";
-            this.btnSortAsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSortAsc.UseVisualStyleBackColor = true;
-            this.btnSortAsc.Visible = false;
-            this.btnSortAsc.Click += new System.EventHandler(this.btnSortAsc_Click);
-            // 
-            // btnSortDesc
-            // 
-            this.btnSortDesc.AutoSize = true;
-            this.btnSortDesc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSortDesc.FlatAppearance.BorderSize = 0;
-            this.btnSortDesc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSortDesc.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.btnSortDesc.ForeColor = System.Drawing.Color.White;
-            this.btnSortDesc.IconChar = FontAwesome.Sharp.IconChar.SortAlphaUpAlt;
-            this.btnSortDesc.IconColor = System.Drawing.Color.White;
-            this.btnSortDesc.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnSortDesc.IconSize = 32;
-            this.btnSortDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSortDesc.Location = new System.Drawing.Point(0, 175);
-            this.btnSortDesc.Name = "btnSortDesc";
-            this.btnSortDesc.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSortDesc.Size = new System.Drawing.Size(159, 38);
-            this.btnSortDesc.TabIndex = 5;
-            this.btnSortDesc.Text = "Sort Desc";
-            this.btnSortDesc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSortDesc.UseVisualStyleBackColor = true;
-            this.btnSortDesc.Visible = false;
-            this.btnSortDesc.Click += new System.EventHandler(this.btnSortDesc_Click);
-            // 
             // frmMusicPlayer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 740);
+            this.ClientSize = new System.Drawing.Size(818, 601);
             this.Controls.Add(this.containerMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmMusicPlayer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Music Player";
