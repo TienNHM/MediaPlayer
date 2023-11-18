@@ -82,18 +82,35 @@ namespace Media_Player
             this.btnFavSongs.Visible = this.isFavoriteExpanded;
         }
 
-        private void btnAddMusic_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            ChooseMusic();
-
-            // Update playlist dang phat
-            this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
-            this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
-
-            // Update giao diện hiển thị
-            if (this.listSongs.Items.Count > 0)
+            if (tabSongVideo.SelectedIndex == (int)TabMedia.Video)
             {
-                this.listSongs.SelectedIndex = 0;
+                ChooseVideo();
+
+                // Update playlist dang phat
+                this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
+                this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
+
+                // Update giao diện hiển thị
+                if (this.listVideos.Items.Count > 0)
+                {
+                    this.listVideos.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                ChooseMusic();
+
+                // Update playlist dang phat
+                this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
+                this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
+
+                // Update giao diện hiển thị
+                if (this.listSongs.Items.Count > 0)
+                {
+                    this.listSongs.SelectedIndex = 0;
+                }
             }
 
             // Update icon playing
@@ -101,23 +118,28 @@ namespace Media_Player
             this.PlayingStateChange();
         }
 
-        private void btnAddVideo_Click(object sender, EventArgs e)
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            ChooseVideo();
-
-            // Update playlist dang phat
-            this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
-            this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
-
-            // Update giao diện hiển thị
-            if (this.listVideos.Items.Count > 0)
+            if (tabSongVideo.SelectedIndex == (int)TabMedia.Video)
             {
-                this.listVideos.SelectedIndex = 0;
+                int selectedIndex = this.listVideos.SelectedIndex;
+                Media selectedItem = this.listVideos.SelectedItem as Media;
+                
+                this.listVideoData.Remove(selectedItem);
+                this.playlistAllVideos.removeItem(this.playlistAllVideos.Item[selectedIndex]);
+                
+                this.UpdateListVideosView();
             }
+            else
+            {
+                int selectedIndex = this.listSongs.SelectedIndex;
+                Media selectedItem = this.listSongs.SelectedItem as Media;
+                
+                this.listSongData.Remove(selectedItem);
+                this.playlistAllSongs.removeItem(this.playlistAllSongs.Item[selectedIndex]);
 
-            // Update icon playing
-            this.isPlaying = true;
-            this.PlayingStateChange();
+                this.UpdateListSongsView();
+            }
         }
 
         private void btnFavSongs_Click(object sender, EventArgs e)
@@ -134,8 +156,8 @@ namespace Media_Player
         {
             this.isLibraryExpanded = !this.isLibraryExpanded;
 
-            this.btnAddVideo.Visible = this.isLibraryExpanded;
-            this.btnAddMusic.Visible = this.isLibraryExpanded;
+            this.btnAdd.Visible = this.isLibraryExpanded;
+            this.btnRemove.Visible = this.isLibraryExpanded;
             this.btnSortAsc.Visible = this.isLibraryExpanded;
             this.btnSortDesc.Visible = this.isLibraryExpanded;
         }
@@ -151,11 +173,6 @@ namespace Media_Player
                     this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
                     break;
             }
-        }
-
-        private void btnHome_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void listSongs_SelectedIndexChanged(object sender, EventArgs e)
@@ -282,7 +299,7 @@ namespace Media_Player
                 string[] files = dialog.FileNames;
 
                 // Xóa danh sách phát hiện tại
-                this.axWindowsMediaPlayer.playlistCollection.remove(playlistAllSongs);
+                this.playlistAllSongs.clear();
 
                 foreach (string file in files)
                 {
@@ -365,7 +382,7 @@ namespace Media_Player
                 string[] files = dialog.FileNames;
 
                 // Xóa tất cả video có trong playlist hiện tại
-                this.axWindowsMediaPlayer.playlistCollection.remove(playlistAllVideos);
+                this.playlistAllVideos.clear();
 
                 foreach (string filePath in files)
                 {
