@@ -26,9 +26,10 @@ namespace Media_Player
         private readonly string PLAYLIST_FAV_SONGS = "Favorite songs";
         private readonly string PLAYLIST_FAV_VIDEOS = "Favorite videos";
         IWMPPlaylist playlistAllSongs, playlistAllVideos, playlistFavSongs, playlistFavVideos;
-        private bool isLibraryExpanded = false;
-        private bool isFavoriteExpanded = false;
+        private bool isLibraryExpanded = true;
+        private bool isFavoriteExpanded = true;
         private bool isPlaying = false;
+        private int selectedIndex = -1;
         private List<string> MusicFileExtensions = new List<string>
         {
             MusicConsts.MovingPicturesExpertsGroup,
@@ -96,6 +97,7 @@ namespace Media_Player
                 if (this.listVideos.Items.Count > 0)
                 {
                     this.listVideos.SelectedIndex = 0;
+                    this.selectedIndex = 0;
                 }
             }
             else
@@ -110,6 +112,7 @@ namespace Media_Player
                 if (this.listSongs.Items.Count > 0)
                 {
                     this.listSongs.SelectedIndex = 0;
+                    this.selectedIndex = 0;
                 }
             }
 
@@ -177,13 +180,12 @@ namespace Media_Player
 
         private void listSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedIndex = this.listSongs.SelectedIndex;
             Media selectedItem = this.listSongs.SelectedItem as Media;
 
-            int index = this.listSongData.FindIndex(song => song.Name == selectedItem.Name);
-
-            if (index >= 0 && index < playlistAllSongs.count)
+            if (selectedIndex >= 0 && selectedIndex < playlistAllSongs.count)
             {
-                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllSongs.Item[index]);
+                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllSongs.Item[selectedIndex]);
                 //this.axWindowsMediaPlayer.URL = listSongData[index].FilePath;
             }
         }
@@ -216,11 +218,49 @@ namespace Media_Player
         private void btnNext_Click(object sender, EventArgs e)
         {
             this.axWindowsMediaPlayer.Ctlcontrols.next();
+            
+            this.selectedIndex += 1;
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                if (this.selectedIndex == this.listVideoData.Count)
+                {
+                    this.selectedIndex = 0;
+                }
+                this.listVideos.SelectedIndex = this.selectedIndex;
+            }
+            else
+            {
+                if (this.selectedIndex == this.listSongData.Count)
+                {
+                    this.selectedIndex = 0;
+                }
+                this.listSongs.SelectedIndex = this.selectedIndex;
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.axWindowsMediaPlayer.Ctlcontrols.previous();
+
+            this.selectedIndex -= 1;
+           
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                if (this.selectedIndex < 0)
+                {
+                    this.selectedIndex = this.listVideoData.Count - 1;
+                }
+                this.listVideos.SelectedIndex = this.selectedIndex;
+
+            }
+            else
+            {
+                if (this.selectedIndex < 0)
+                {
+                    this.selectedIndex = this.listSongData.Count - 1;
+                }
+                this.listSongs.SelectedIndex = this.selectedIndex;
+            }
         }
 
         private void btnSortAsc_Click(object sender, EventArgs e)
@@ -275,13 +315,12 @@ namespace Media_Player
 
         private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedIndex = this.listVideos.SelectedIndex;
             Media selectedItem = this.listVideos.SelectedItem as Media;
 
-            int index = this.listVideoData.FindIndex(song => song.Name == selectedItem.Name);
-
-            if (index >= 0 && index < playlistAllVideos.count)
+            if (selectedIndex >= 0 && selectedIndex < playlistAllVideos.count)
             {
-                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllVideos.Item[index]);
+                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllVideos.Item[selectedIndex]);
                 //this.axWindowsMediaPlayer.URL = listVideoData[index].FilePath;
             }
         }
@@ -386,15 +425,15 @@ namespace Media_Player
 
                 foreach (string filePath in files)
                 {
+                    var mediaItem = axWindowsMediaPlayer.newMedia(filePath);
+                    this.playlistAllVideos.appendItem(mediaItem);
+
                     Media media = new Media()
                     {
                         FilePath = filePath,
-                        Name = System.IO.Path.GetFileNameWithoutExtension(filePath),
+                        Name = mediaItem.name,
                     };
                     this.listVideoData.Add(media);
-
-                    var mediaItem = axWindowsMediaPlayer.newMedia(filePath);
-                    this.playlistAllVideos.appendItem(mediaItem);
                 }
 
                 this.UpdateListVideosView();

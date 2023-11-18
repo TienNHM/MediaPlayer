@@ -223,7 +223,6 @@
             this.btnFavVideos.Text = "Favorite videos";
             this.btnFavVideos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFavVideos.UseVisualStyleBackColor = true;
-            this.btnFavVideos.Visible = false;
             this.btnFavVideos.Click += new System.EventHandler(this.btnFavVideos_Click);
             // 
             // btnFavSongs
@@ -248,7 +247,6 @@
             this.btnFavSongs.Text = "Favorite songs";
             this.btnFavSongs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFavSongs.UseVisualStyleBackColor = true;
-            this.btnFavSongs.Visible = false;
             this.btnFavSongs.Click += new System.EventHandler(this.btnFavSongs_Click);
             // 
             // btnFavorite
@@ -312,7 +310,6 @@
             this.btnSortDesc.Text = "Sort Desc";
             this.btnSortDesc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSortDesc.UseVisualStyleBackColor = true;
-            this.btnSortDesc.Visible = false;
             this.btnSortDesc.Click += new System.EventHandler(this.btnSortDesc_Click);
             // 
             // btnSortAsc
@@ -337,7 +334,6 @@
             this.btnSortAsc.Text = "Sort Asc";
             this.btnSortAsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSortAsc.UseVisualStyleBackColor = true;
-            this.btnSortAsc.Visible = false;
             this.btnSortAsc.Click += new System.EventHandler(this.btnSortAsc_Click);
             // 
             // btnRemove
@@ -362,7 +358,6 @@
             this.btnRemove.Text = "Remove";
             this.btnRemove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Visible = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnAdd
@@ -387,7 +382,6 @@
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnLibrary
