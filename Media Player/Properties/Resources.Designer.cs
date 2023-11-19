@@ -59,23 +59,5 @@ namespace Media_Player.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string MusicData {
-            get {
-                return ResourceManager.GetString("MusicData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string VideoData {
-            get {
-                return ResourceManager.GetString("VideoData", resourceCulture);
-            }
-        }
     }
 }

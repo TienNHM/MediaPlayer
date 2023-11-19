@@ -9,6 +9,16 @@ namespace Media_Player.Entity
     public class Media
     {
         /// <summary>
+        /// Khóa chính, đánh theo số thứ tự
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Mã bài hát
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
         /// Tên video/bài hát
         /// </summary>
         public string Name { get; set; }
@@ -19,9 +29,14 @@ namespace Media_Player.Entity
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Loại media: Video/Audio
+        /// Loại media: Video/Music
         /// </summary>
-        public MediaType MediaType { get; set; }
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Trạng thái: Active/Deactive
+        /// </summary>
+        public string Status {  get; set; }
 
         public override string ToString()
         {
@@ -42,11 +57,5 @@ namespace Media_Player.Entity
         {
             return String.Compare(media1.Name, media2.Name, ignoreCase: true);
         }
-    }
-
-    public enum MediaType
-    {
-        Video,
-        Audio
     }
 }

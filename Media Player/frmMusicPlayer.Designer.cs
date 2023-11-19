@@ -59,6 +59,7 @@
             this.btnNext = new FontAwesome.Sharp.IconButton();
             this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnMediaAction = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -530,13 +531,15 @@
             // tableFooter
             // 
             this.tableFooter.BackColor = System.Drawing.Color.Teal;
-            this.tableFooter.ColumnCount = 3;
-            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableFooter.ColumnCount = 4;
+            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableFooter.Controls.Add(this.btnBack, 0, 0);
             this.tableFooter.Controls.Add(this.btnPlay, 1, 0);
             this.tableFooter.Controls.Add(this.btnNext, 2, 0);
+            this.tableFooter.Controls.Add(this.btnMediaAction, 3, 0);
             this.tableFooter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableFooter.Location = new System.Drawing.Point(0, 47);
             this.tableFooter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -558,7 +561,7 @@
             this.btnBack.Location = new System.Drawing.Point(20, 10);
             this.btnBack.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(323, 32);
+            this.btnBack.Size = new System.Drawing.Size(232, 32);
             this.btnBack.TabIndex = 0;
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -572,10 +575,10 @@
             this.btnPlay.IconColor = System.Drawing.SystemColors.Control;
             this.btnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnPlay.IconSize = 32;
-            this.btnPlay.Location = new System.Drawing.Point(383, 10);
+            this.btnPlay.Location = new System.Drawing.Point(292, 10);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(323, 32);
+            this.btnPlay.Size = new System.Drawing.Size(232, 32);
             this.btnPlay.TabIndex = 1;
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -589,10 +592,10 @@
             this.btnNext.IconColor = System.Drawing.SystemColors.Control;
             this.btnNext.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnNext.IconSize = 32;
-            this.btnNext.Location = new System.Drawing.Point(746, 10);
+            this.btnNext.Location = new System.Drawing.Point(564, 10);
             this.btnNext.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(325, 32);
+            this.btnNext.Size = new System.Drawing.Size(232, 32);
             this.btnNext.TabIndex = 2;
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -621,6 +624,23 @@
             this.splitContainer1.Size = new System.Drawing.Size(1091, 537);
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // btnMediaAction
+            // 
+            this.btnMediaAction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnMediaAction.FlatAppearance.BorderSize = 0;
+            this.btnMediaAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMediaAction.IconChar = FontAwesome.Sharp.IconChar.EllipsisVertical;
+            this.btnMediaAction.IconColor = System.Drawing.SystemColors.Control;
+            this.btnMediaAction.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnMediaAction.IconSize = 32;
+            this.btnMediaAction.Location = new System.Drawing.Point(836, 10);
+            this.btnMediaAction.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnMediaAction.Name = "btnMediaAction";
+            this.btnMediaAction.Size = new System.Drawing.Size(235, 32);
+            this.btnMediaAction.TabIndex = 3;
+            this.btnMediaAction.UseVisualStyleBackColor = true;
+            this.btnMediaAction.Click += new System.EventHandler(this.btnMediaAction_Click);
             // 
             // frmMusicPlayer
             // 
@@ -698,5 +718,6 @@
         private FontAwesome.Sharp.IconButton btnSortDesc;
         private FontAwesome.Sharp.IconButton btnSortAsc;
         private FontAwesome.Sharp.IconButton btnRemove;
+        private FontAwesome.Sharp.IconButton btnMediaAction;
     }
 }
