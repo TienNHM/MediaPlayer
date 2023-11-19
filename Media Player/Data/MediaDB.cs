@@ -25,7 +25,7 @@ namespace Media_Player.Data
             this.Database = new Database();
         }
 
-        public List<Media> GetAllMedia(string mediaType = null)
+        public LinkedList<Media> GetAll(string mediaType = null)
         {
             string query = string.Empty;
             if (AvailableMediaType.Contains(mediaType))
@@ -37,12 +37,14 @@ namespace Media_Player.Data
                 query = "SELECT * FROM Media;";
             }
 
-            List<Media> result = new List<Media>();
+            LinkedList<Media> result = new LinkedList<Media>();
 
             this.Database.Connection.Open();
 
             SQLiteCommand command = new SQLiteCommand(query, this.Database.Connection);
+            
             SQLiteDataReader dataReader = command.ExecuteReader();
+            
             while (dataReader.Read())
             {
                 if (!dataReader.IsDBNull(1))
@@ -56,7 +58,7 @@ namespace Media_Player.Data
                         Type = dataReader.GetString(4),
                         Status = dataReader.GetString(5)
                     };
-                    result.Add(media);
+                    result.AddLast(media);
                 }
             }
             dataReader.Close();

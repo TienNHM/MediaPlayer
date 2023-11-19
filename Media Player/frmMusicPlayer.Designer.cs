@@ -36,8 +36,7 @@
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.tableLayoutSidebar = new System.Windows.Forms.TableLayoutPanel();
             this.panelFavorite = new System.Windows.Forms.Panel();
-            this.btnFavVideos = new FontAwesome.Sharp.IconButton();
-            this.btnFavSongs = new FontAwesome.Sharp.IconButton();
+            this.btnCreateNewLibrary = new FontAwesome.Sharp.IconButton();
             this.btnFavorite = new FontAwesome.Sharp.IconButton();
             this.panelLibrary = new System.Windows.Forms.Panel();
             this.btnSortDesc = new FontAwesome.Sharp.IconButton();
@@ -57,9 +56,10 @@
             this.btnBack = new FontAwesome.Sharp.IconButton();
             this.btnPlay = new FontAwesome.Sharp.IconButton();
             this.btnNext = new FontAwesome.Sharp.IconButton();
+            this.btnMediaAction = new FontAwesome.Sharp.IconButton();
             this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnMediaAction = new FontAwesome.Sharp.IconButton();
+            this.panelAllFav = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -191,64 +191,40 @@
             // panelFavorite
             // 
             this.panelFavorite.AutoSize = true;
-            this.panelFavorite.Controls.Add(this.btnFavVideos);
-            this.panelFavorite.Controls.Add(this.btnFavSongs);
+            this.panelFavorite.Controls.Add(this.panelAllFav);
+            this.panelFavorite.Controls.Add(this.btnCreateNewLibrary);
             this.panelFavorite.Controls.Add(this.btnFavorite);
-            this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFavorite.Location = new System.Drawing.Point(3, 339);
             this.panelFavorite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelFavorite.Name = "panelFavorite";
             this.panelFavorite.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelFavorite.Size = new System.Drawing.Size(261, 164);
+            this.panelFavorite.Size = new System.Drawing.Size(261, 272);
             this.panelFavorite.TabIndex = 6;
             // 
-            // btnFavVideos
+            // btnCreateNewLibrary
             // 
-            this.btnFavVideos.AutoSize = true;
-            this.btnFavVideos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnFavVideos.FlatAppearance.BorderSize = 0;
-            this.btnFavVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFavVideos.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.btnFavVideos.ForeColor = System.Drawing.Color.White;
-            this.btnFavVideos.IconChar = FontAwesome.Sharp.IconChar.VideoCamera;
-            this.btnFavVideos.IconColor = System.Drawing.Color.White;
-            this.btnFavVideos.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnFavVideos.IconSize = 32;
-            this.btnFavVideos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFavVideos.Location = new System.Drawing.Point(0, 107);
-            this.btnFavVideos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnFavVideos.Name = "btnFavVideos";
-            this.btnFavVideos.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.btnFavVideos.Size = new System.Drawing.Size(261, 47);
-            this.btnFavVideos.TabIndex = 4;
-            this.btnFavVideos.Text = "Favorite videos";
-            this.btnFavVideos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnFavVideos.UseVisualStyleBackColor = true;
-            this.btnFavVideos.Click += new System.EventHandler(this.btnFavVideos_Click);
-            // 
-            // btnFavSongs
-            // 
-            this.btnFavSongs.AutoSize = true;
-            this.btnFavSongs.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnFavSongs.FlatAppearance.BorderSize = 0;
-            this.btnFavSongs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFavSongs.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            this.btnFavSongs.ForeColor = System.Drawing.Color.White;
-            this.btnFavSongs.IconChar = FontAwesome.Sharp.IconChar.Microphone;
-            this.btnFavSongs.IconColor = System.Drawing.Color.White;
-            this.btnFavSongs.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnFavSongs.IconSize = 32;
-            this.btnFavSongs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFavSongs.Location = new System.Drawing.Point(0, 60);
-            this.btnFavSongs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnFavSongs.Name = "btnFavSongs";
-            this.btnFavSongs.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            this.btnFavSongs.Size = new System.Drawing.Size(261, 47);
-            this.btnFavSongs.TabIndex = 1;
-            this.btnFavSongs.Text = "Favorite songs";
-            this.btnFavSongs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnFavSongs.UseVisualStyleBackColor = true;
-            this.btnFavSongs.Click += new System.EventHandler(this.btnFavSongs_Click);
+            this.btnCreateNewLibrary.AutoSize = true;
+            this.btnCreateNewLibrary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCreateNewLibrary.FlatAppearance.BorderSize = 0;
+            this.btnCreateNewLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateNewLibrary.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnCreateNewLibrary.ForeColor = System.Drawing.Color.White;
+            this.btnCreateNewLibrary.IconChar = FontAwesome.Sharp.IconChar.Add;
+            this.btnCreateNewLibrary.IconColor = System.Drawing.Color.White;
+            this.btnCreateNewLibrary.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCreateNewLibrary.IconSize = 32;
+            this.btnCreateNewLibrary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCreateNewLibrary.Location = new System.Drawing.Point(0, 60);
+            this.btnCreateNewLibrary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCreateNewLibrary.Name = "btnCreateNewLibrary";
+            this.btnCreateNewLibrary.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.btnCreateNewLibrary.Size = new System.Drawing.Size(261, 47);
+            this.btnCreateNewLibrary.TabIndex = 5;
+            this.btnCreateNewLibrary.Text = "Create new library";
+            this.btnCreateNewLibrary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCreateNewLibrary.UseVisualStyleBackColor = true;
+            this.btnCreateNewLibrary.Click += new System.EventHandler(this.btnCreateNewLibrary_Click);
             // 
             // btnFavorite
             // 
@@ -600,6 +576,23 @@
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
+            // btnMediaAction
+            // 
+            this.btnMediaAction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnMediaAction.FlatAppearance.BorderSize = 0;
+            this.btnMediaAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMediaAction.IconChar = FontAwesome.Sharp.IconChar.EllipsisVertical;
+            this.btnMediaAction.IconColor = System.Drawing.SystemColors.Control;
+            this.btnMediaAction.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnMediaAction.IconSize = 32;
+            this.btnMediaAction.Location = new System.Drawing.Point(836, 10);
+            this.btnMediaAction.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.btnMediaAction.Name = "btnMediaAction";
+            this.btnMediaAction.Size = new System.Drawing.Size(235, 32);
+            this.btnMediaAction.TabIndex = 3;
+            this.btnMediaAction.UseVisualStyleBackColor = true;
+            this.btnMediaAction.Click += new System.EventHandler(this.btnMediaAction_Click);
+            // 
             // labeMediaName
             // 
             this.labeMediaName.BackColor = System.Drawing.Color.LightSteelBlue;
@@ -625,22 +618,15 @@
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
-            // btnMediaAction
+            // panelAllFav
             // 
-            this.btnMediaAction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMediaAction.FlatAppearance.BorderSize = 0;
-            this.btnMediaAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMediaAction.IconChar = FontAwesome.Sharp.IconChar.EllipsisVertical;
-            this.btnMediaAction.IconColor = System.Drawing.SystemColors.Control;
-            this.btnMediaAction.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnMediaAction.IconSize = 32;
-            this.btnMediaAction.Location = new System.Drawing.Point(836, 10);
-            this.btnMediaAction.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
-            this.btnMediaAction.Name = "btnMediaAction";
-            this.btnMediaAction.Size = new System.Drawing.Size(235, 32);
-            this.btnMediaAction.TabIndex = 3;
-            this.btnMediaAction.UseVisualStyleBackColor = true;
-            this.btnMediaAction.Click += new System.EventHandler(this.btnMediaAction_Click);
+            this.panelAllFav.AutoScroll = true;
+            this.panelAllFav.AutoSize = true;
+            this.panelAllFav.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAllFav.Location = new System.Drawing.Point(0, 107);
+            this.panelAllFav.Name = "panelAllFav";
+            this.panelAllFav.Size = new System.Drawing.Size(261, 155);
+            this.panelAllFav.TabIndex = 6;
             // 
             // frmMusicPlayer
             // 
@@ -651,6 +637,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMusicPlayer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -701,8 +688,6 @@
         private System.Windows.Forms.Panel panelLibrary;
         private FontAwesome.Sharp.IconButton btnAdd;
         private System.Windows.Forms.Panel panelFavorite;
-        private FontAwesome.Sharp.IconButton btnFavVideos;
-        private FontAwesome.Sharp.IconButton btnFavSongs;
         private System.Windows.Forms.TableLayoutPanel tableLayoutMain;
         private System.Windows.Forms.TabControl tabSongVideo;
         private System.Windows.Forms.TabPage tabSongs;
@@ -719,5 +704,7 @@
         private FontAwesome.Sharp.IconButton btnSortAsc;
         private FontAwesome.Sharp.IconButton btnRemove;
         private FontAwesome.Sharp.IconButton btnMediaAction;
+        private FontAwesome.Sharp.IconButton btnCreateNewLibrary;
+        private System.Windows.Forms.Panel panelAllFav;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Media_Player.Contants;
+﻿using FontAwesome.Sharp;
+using Media_Player.Contants;
 using Media_Player.Data;
 using Media_Player.Entity;
 using Media_Player.Utils;
@@ -32,7 +33,9 @@ namespace Media_Player
         private bool isFavoriteExpanded = true;
         private bool isPlaying = false;
         private int selectedIndex = 0;
-        private MediaDB mediaDB = new MediaDB();
+        private MediaDB _mediaDB = new MediaDB();
+        private LibraryDB _libraryDB = new LibraryDB();
+        private LinkedList<Library> AllLibraries = new LinkedList<Library>();   
         private List<string> MusicFileExtensions = new List<string>
         {
             MusicConsts.MovingPicturesExpertsGroup,
@@ -74,7 +77,14 @@ namespace Media_Player
 
         private void LoadData()
         {
-            List<Media> allMedia = mediaDB.GetAllMedia();
+            this.AllLibraries = _libraryDB.GetAll();
+            foreach (Library library in AllLibraries)
+            {
+                IconButton iconButton = CreateIconButton(library.Code, library.Name);
+                panelAllFav.Controls.Add(iconButton);
+            }
+
+            LinkedList<Media> allMedia = _mediaDB.GetAll();
             this.listSongData = allMedia.Where(x => x.Type == MediaType.Music).ToList();
             this.listVideoData = allMedia.Where(x => x.Type == MediaType.Video).ToList();
 
@@ -100,9 +110,8 @@ namespace Media_Player
         private void btnFavorite_Click(object sender, EventArgs e)
         {
             this.isFavoriteExpanded = !this.isFavoriteExpanded;
-
-            this.btnFavVideos.Visible = this.isFavoriteExpanded;
-            this.btnFavSongs.Visible = this.isFavoriteExpanded;
+            this.btnCreateNewLibrary.Visible = this.isFavoriteExpanded;
+            this.panelAllFav.Visible = this.isFavoriteExpanded;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -147,22 +156,22 @@ namespace Media_Player
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            string message = "Bạn có muốn xóa bỏ bài hát được chọn không?";
-            var dialogResult = MessageBox.Show(message, "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-
             if (tabSongVideo.SelectedIndex == (int)TabMedia.Video)
             {
                 int selectedIndex = this.listVideos.SelectedIndex;
                 Media selectedItem = this.listVideos.SelectedItem as Media;
-                
+
+                string message = $"Bạn có muốn xóa bỏ bài hát *{selectedItem.Name}* không?";
+                var dialogResult = MessageBox.Show(message, "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
                 this.listVideoData.Remove(selectedItem);
                 this.playlistAllVideos.removeItem(this.playlistAllVideos.Item[selectedIndex]);
 
-                this.mediaDB.Delete(selectedItem);
+                this._mediaDB.Delete(selectedItem);
                 
                 this.UpdateListVideosView();
 
@@ -177,11 +186,18 @@ namespace Media_Player
             {
                 int selectedIndex = this.listSongs.SelectedIndex;
                 Media selectedItem = this.listSongs.SelectedItem as Media;
-                
+
+                string message = $"Bạn có muốn xóa bỏ bài hát *{selectedItem.Name}* không?";
+                var dialogResult = MessageBox.Show(message, "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
                 this.listSongData.Remove(selectedItem);
                 this.playlistAllSongs.removeItem(this.playlistAllSongs.Item[selectedIndex]);
 
-                this.mediaDB.Delete(selectedItem);
+                this._mediaDB.Delete(selectedItem);
 
                 this.UpdateListSongsView();
 
@@ -199,6 +215,34 @@ namespace Media_Player
         private void btnFavSongs_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private IconButton CreateIconButton(string name, string text)
+        {
+            IconButton iconButton = new IconButton();
+            iconButton.AutoSize = true;
+            iconButton.Dock = System.Windows.Forms.DockStyle.Top;
+            iconButton.FlatAppearance.BorderSize = 0;
+            iconButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            iconButton.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            iconButton.ForeColor = System.Drawing.Color.White;
+            iconButton.IconChar = FontAwesome.Sharp.IconChar.Star;
+            iconButton.IconColor = System.Drawing.Color.White;
+            iconButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            iconButton.IconSize = 32;
+            iconButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            iconButton.Location = new System.Drawing.Point(0, 154);
+            iconButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            iconButton.Name = name;
+            iconButton.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            iconButton.Size = new System.Drawing.Size(261, 47);
+            iconButton.TabIndex = 4;
+            iconButton.Text = text;
+            iconButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            iconButton.UseVisualStyleBackColor = true;
+            iconButton.Click += new System.EventHandler(this.btnFavVideos_Click);
+
+            return iconButton;
         }
 
         private void btnFavVideos_Click(object sender, EventArgs e)
@@ -432,14 +476,14 @@ namespace Media_Player
 
                     Media media = new Media()
                     {
-                        Code = DateTime.UtcNow.ToString("yyyyMMddhhmmssffffff"),
+                        Code = CodeUtils.GenCode(),
                         FilePath = filePath,
                         Name = mediaItem.name,
-                        Status = MediaStatus.Active,
+                        Status = Status.Active,
                         Type = MediaType.Video
                     };
                     this.listVideoData.Add(media);
-                    mediaDB.Create(media);
+                    _mediaDB.Create(media);
                 }
             }
             else
@@ -451,14 +495,14 @@ namespace Media_Player
 
                     Media media = new Media()
                     {
-                        Code = DateTime.UtcNow.ToString("yyyyMMddhhmmssffffff"),
+                        Code = CodeUtils.GenCode(),
                         FilePath = filePath,
                         Name = mediaItem.name,
-                        Status = MediaStatus.Active,
+                        Status = Status.Active,
                         Type = MediaType.Music
                     };
                     this.listSongData.Add(media);
-                    mediaDB.Create(media);
+                    _mediaDB.Create(media);
                 }
             }
         }
@@ -501,9 +545,26 @@ namespace Media_Player
             return result;
         }
 
+        private Media GetSelectedMedia()
+        {
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            {
+                return this.listVideos.SelectedItem as Media;
+            }
+            else
+            {
+                return this.listSongs.SelectedItem as Media;
+            }
+        }
         private void btnMediaAction_Click(object sender, EventArgs e)
         {
-            using (MediaActionMenu mediaActionMenu = new MediaActionMenu())
+            Media selectedMedia = GetSelectedMedia();
+
+            using (frmMediaActionMenu mediaActionMenu = new frmMediaActionMenu()
+            {
+                AllLibraries = this.AllLibraries,
+                SelectedMedia = selectedMedia
+            })
             {
                 DialogResult dialogResult = mediaActionMenu.ShowDialog();
                 if (dialogResult == DialogResult.OK)
@@ -511,6 +572,11 @@ namespace Media_Player
                     MediaAction mediaAction = mediaActionMenu.SelectedAction;
                 }
             }
+        }
+
+        private void btnCreateNewLibrary_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>

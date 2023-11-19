@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Media_Player.Contants
 {
-    public static class MediaStatus
+    public static class Status
     {
         public static string Active = "Active";
         public static string Deactive = "Deactive";

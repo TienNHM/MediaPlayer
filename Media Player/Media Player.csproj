@@ -105,10 +105,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consts.cs" />
-    <Compile Include="Contants\MediaStatus.cs" />
+    <Compile Include="Contants\Status.cs" />
     <Compile Include="Contants\MediaType.cs" />
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\LibraryDB.cs" />
+    <Compile Include="Data\LibraryInfoDB.cs" />
     <Compile Include="Data\MediaDB.cs" />
+    <Compile Include="Entity\Library.cs" />
+    <Compile Include="Entity\LibraryInfo.cs" />
     <Compile Include="Entity\Media.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -122,11 +126,11 @@
     <Compile Include="frmMusicPlayer.Designer.cs">
       <DependentUpon>frmMusicPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="MediaActionMenu.cs">
+    <Compile Include="frmMediaActionMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MediaActionMenu.Designer.cs">
-      <DependentUpon>MediaActionMenu.cs</DependentUpon>
+    <Compile Include="frmMediaActionMenu.Designer.cs">
+      <DependentUpon>frmMediaActionMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CodeUtils.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\SortUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
@@ -147,8 +152,8 @@
     <EmbeddedResource Include="frmMusicPlayer.resx">
       <DependentUpon>frmMusicPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MediaActionMenu.resx">
-      <DependentUpon>MediaActionMenu.cs</DependentUpon>
+    <EmbeddedResource Include="frmMediaActionMenu.resx">
+      <DependentUpon>frmMediaActionMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
