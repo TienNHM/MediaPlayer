@@ -59,7 +59,9 @@
             this.btnMediaAction = new FontAwesome.Sharp.IconButton();
             this.labeMediaName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panelAllFav = new System.Windows.Forms.Panel();
+            this.selectLibrary = new System.Windows.Forms.ComboBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -82,6 +84,7 @@
             this.tableFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // containerMain
@@ -191,7 +194,7 @@
             // panelFavorite
             // 
             this.panelFavorite.AutoSize = true;
-            this.panelFavorite.Controls.Add(this.panelAllFav);
+            this.panelFavorite.Controls.Add(this.panel3);
             this.panelFavorite.Controls.Add(this.btnCreateNewLibrary);
             this.panelFavorite.Controls.Add(this.btnFavorite);
             this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -221,7 +224,7 @@
             this.btnCreateNewLibrary.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
             this.btnCreateNewLibrary.Size = new System.Drawing.Size(261, 47);
             this.btnCreateNewLibrary.TabIndex = 5;
-            this.btnCreateNewLibrary.Text = "Create new library";
+            this.btnCreateNewLibrary.Text = "Tạo mới";
             this.btnCreateNewLibrary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCreateNewLibrary.UseVisualStyleBackColor = true;
             this.btnCreateNewLibrary.Click += new System.EventHandler(this.btnCreateNewLibrary_Click);
@@ -243,7 +246,7 @@
             this.btnFavorite.Name = "btnFavorite";
             this.btnFavorite.Size = new System.Drawing.Size(261, 50);
             this.btnFavorite.TabIndex = 3;
-            this.btnFavorite.Text = "FAVORITE";
+            this.btnFavorite.Text = "DANH SÁCH";
             this.btnFavorite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFavorite.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFavorite.UseVisualStyleBackColor = true;
@@ -618,15 +621,42 @@
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
-            // panelAllFav
+            // selectLibrary
             // 
-            this.panelAllFav.AutoScroll = true;
-            this.panelAllFav.AutoSize = true;
-            this.panelAllFav.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAllFav.Location = new System.Drawing.Point(0, 107);
-            this.panelAllFav.Name = "panelAllFav";
-            this.panelAllFav.Size = new System.Drawing.Size(261, 155);
-            this.panelAllFav.TabIndex = 6;
+            this.selectLibrary.BackColor = System.Drawing.Color.Teal;
+            this.selectLibrary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.selectLibrary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.selectLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectLibrary.ForeColor = System.Drawing.Color.White;
+            this.selectLibrary.FormattingEnabled = true;
+            this.selectLibrary.Location = new System.Drawing.Point(0, 60);
+            this.selectLibrary.Name = "selectLibrary";
+            this.selectLibrary.Size = new System.Drawing.Size(261, 37);
+            this.selectLibrary.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.selectLibrary);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 107);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(261, 140);
+            this.panel3.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(20, 20, 20, 10);
+            this.label1.Size = new System.Drawing.Size(261, 60);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Phát danh sách";
             // 
             // frmMusicPlayer
             // 
@@ -669,6 +699,7 @@
             this.tableFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -705,6 +736,8 @@
         private FontAwesome.Sharp.IconButton btnRemove;
         private FontAwesome.Sharp.IconButton btnMediaAction;
         private FontAwesome.Sharp.IconButton btnCreateNewLibrary;
-        private System.Windows.Forms.Panel panelAllFav;
+        private System.Windows.Forms.ComboBox selectLibrary;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
     }
 }

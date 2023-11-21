@@ -1,5 +1,5 @@
 ﻿using FontAwesome.Sharp;
-using Media_Player.Contants;
+using Media_Player.Constants;
 using Media_Player.Data;
 using Media_Player.Entity;
 using Media_Player.Utils;
@@ -17,8 +17,8 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Shapes;
 using WMPLib;
-using MusicConsts = Media_Player.MusicExtensionFilterConsts;
-using VideoConsts = Media_Player.VideoExtensionFilterConsts;
+using MusicConsts = Media_Player.Constants.MusicExtensionFilterConsts;
+using VideoConsts = Media_Player.Constants.VideoExtensionFilterConsts;
 
 namespace Media_Player
 {
@@ -77,17 +77,8 @@ namespace Media_Player
 
         private void LoadData()
         {
-            this.AllLibraries = _libraryDB.GetAll();
-            foreach (Library library in AllLibraries)
-            {
-                IconButton iconButton = CreateIconButton(library.Code, library.Name);
-                panelAllFav.Controls.Add(iconButton);
-            }
-
-            LinkedList<Media> allMedia = _mediaDB.GetAll();
-            this.listSongData = allMedia.Where(x => x.Type == MediaType.Music).ToList();
-            this.listVideoData = allMedia.Where(x => x.Type == MediaType.Video).ToList();
-
+            this.LoadLibraries();
+            this.LoadMedias();
             this.InitPlaylists();
 
             // Cập nhật giao diện
@@ -107,11 +98,33 @@ namespace Media_Player
             }
         }
 
+        private void LoadLibraries()
+        {
+            this.AllLibraries = _libraryDB.GetAll();
+            this.AllLibraries.AddFirst(new Library()
+            {
+                Code = null,
+                Name = "#########",
+                Status = Status.Active
+            });
+            var libraies = this.AllLibraries.ToList();
+            
+            this.selectLibrary.DataSource = libraies;
+        }
+
+        private void LoadMedias()
+        {
+            LinkedList<Media> allMedia = _mediaDB.GetAll();
+            this.listSongData = allMedia.Where(x => x.Type == MediaType.Music).ToList();
+            this.listVideoData = allMedia.Where(x => x.Type == MediaType.Video).ToList();
+
+        }
+
         private void btnFavorite_Click(object sender, EventArgs e)
         {
             this.isFavoriteExpanded = !this.isFavoriteExpanded;
             this.btnCreateNewLibrary.Visible = this.isFavoriteExpanded;
-            this.panelAllFav.Visible = this.isFavoriteExpanded;
+            //this.panelAllFav.Visible = this.isFavoriteExpanded;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -210,11 +223,6 @@ namespace Media_Player
             }
 
             this.axWindowsMediaPlayer.Ctlcontrols.play();
-        }
-
-        private void btnFavSongs_Click(object sender, EventArgs e)
-        {
-
         }
 
         private IconButton CreateIconButton(string name, string text)
@@ -576,7 +584,25 @@ namespace Media_Player
 
         private void btnCreateNewLibrary_Click(object sender, EventArgs e)
         {
+            frmCreateLibrary createLibrary = new frmCreateLibrary();
+            
+            DialogResult dialogResult = createLibrary.ShowDialog();
 
+            if (dialogResult == DialogResult.OK)
+            {
+                var libraryName = createLibrary.LibraryName;
+                Library library = new Library()
+                {
+                    Name = libraryName,
+                    Code = CodeUtils.GenCode(),
+                    Status = Status.Active
+                };
+                _libraryDB.Create(library);
+
+                this.LoadLibraries();
+                
+                MessageBox.Show($"Đã tạo thành công thư viện {libraryName}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>

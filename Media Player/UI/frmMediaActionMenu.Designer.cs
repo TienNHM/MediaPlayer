@@ -33,9 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.selectLibrary = new System.Windows.Forms.ComboBox();
             this.panelSelectLibrary = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
+            this.selectLibrary = new System.Windows.Forms.ComboBox();
             this.tableLayout.SuspendLayout();
             this.panelSelectLibrary.SuspendLayout();
             this.SuspendLayout();
@@ -135,21 +135,6 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // selectLibrary
-            // 
-            this.selectLibrary.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.selectLibrary.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.selectLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selectLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.selectLibrary.ForeColor = System.Drawing.Color.White;
-            this.selectLibrary.FormattingEnabled = true;
-            this.selectLibrary.Location = new System.Drawing.Point(0, 0);
-            this.selectLibrary.Margin = new System.Windows.Forms.Padding(5);
-            this.selectLibrary.Name = "selectLibrary";
-            this.selectLibrary.Size = new System.Drawing.Size(507, 37);
-            this.selectLibrary.TabIndex = 4;
-            // 
             // panelSelectLibrary
             // 
             this.panelSelectLibrary.Controls.Add(this.btnOK);
@@ -177,13 +162,27 @@
             this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // selectLibrary
+            // 
+            this.selectLibrary.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.selectLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectLibrary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectLibrary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.selectLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectLibrary.ForeColor = System.Drawing.Color.White;
+            this.selectLibrary.FormattingEnabled = true;
+            this.selectLibrary.Location = new System.Drawing.Point(0, 0);
+            this.selectLibrary.Margin = new System.Windows.Forms.Padding(5);
+            this.selectLibrary.Name = "selectLibrary";
+            this.selectLibrary.Size = new System.Drawing.Size(507, 37);
+            this.selectLibrary.TabIndex = 4;
+            // 
             // frmMediaActionMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 453);
             this.Controls.Add(this.tableLayout);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMediaActionMenu";
