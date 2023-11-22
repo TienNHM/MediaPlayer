@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnAddFav = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.btnRemove = new FontAwesome.Sharp.IconButton();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -62,26 +62,27 @@
             this.btnAddFav.UseVisualStyleBackColor = false;
             this.btnAddFav.Click += new System.EventHandler(this.btnAddFav_Click);
             // 
-            // iconButton1
+            // btnRemove
             // 
-            this.iconButton1.AutoSize = true;
-            this.iconButton1.BackColor = System.Drawing.Color.Teal;
-            this.iconButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.ForeColor = System.Drawing.Color.White;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Minus;
-            this.iconButton1.IconColor = System.Drawing.Color.White;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(3, 260);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(507, 75);
-            this.iconButton1.TabIndex = 1;
-            this.iconButton1.Text = "Xóa khỏi danh sách phát";
-            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.btnRemove.AutoSize = true;
+            this.btnRemove.BackColor = System.Drawing.Color.Teal;
+            this.btnRemove.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnRemove.FlatAppearance.BorderSize = 0;
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.Color.White;
+            this.btnRemove.IconChar = FontAwesome.Sharp.IconChar.Minus;
+            this.btnRemove.IconColor = System.Drawing.Color.White;
+            this.btnRemove.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRemove.Location = new System.Drawing.Point(3, 260);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(507, 75);
+            this.btnRemove.TabIndex = 1;
+            this.btnRemove.Text = "Xóa khỏi danh sách phát";
+            this.btnRemove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRemove.UseVisualStyleBackColor = false;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // label1
             // 
@@ -101,7 +102,7 @@
             // 
             this.tableLayout.ColumnCount = 1;
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayout.Controls.Add(this.iconButton1, 0, 3);
+            this.tableLayout.Controls.Add(this.btnRemove, 0, 3);
             this.tableLayout.Controls.Add(this.btnAddFav, 0, 1);
             this.tableLayout.Controls.Add(this.label1, 0, 0);
             this.tableLayout.Controls.Add(this.btnCancel, 0, 4);
@@ -116,22 +117,22 @@
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayout.Size = new System.Drawing.Size(513, 443);
+            this.tableLayout.Size = new System.Drawing.Size(513, 400);
             this.tableLayout.TabIndex = 3;
             // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnCancel.Location = new System.Drawing.Point(3, 341);
+            this.btnCancel.Location = new System.Drawing.Point(3, 342);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(507, 99);
+            this.btnCancel.Size = new System.Drawing.Size(507, 55);
             this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Đóng";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -181,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 453);
+            this.ClientSize = new System.Drawing.Size(523, 410);
             this.Controls.Add(this.tableLayout);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -202,12 +203,12 @@
         #endregion
 
         private FontAwesome.Sharp.IconButton btnAddFav;
-        private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox selectLibrary;
         private System.Windows.Forms.Panel panelSelectLibrary;
         private System.Windows.Forms.Button btnOK;
+        public FontAwesome.Sharp.IconButton btnRemove;
     }
 }

@@ -25,6 +25,11 @@ namespace Media_Player.Data
             this.Database = new Database();
         }
 
+        /// <summary>
+        /// Lấy tất cả bài hát hiện có
+        /// </summary>
+        /// <param name="mediaType"></param>
+        /// <returns></returns>
         public LinkedList<Media> GetAll(string mediaType = null)
         {
             string query = string.Empty;
@@ -68,6 +73,11 @@ namespace Media_Player.Data
             return result;
         }
 
+        /// <summary>
+        /// Lấy danh sách bài hát theo từng library cụ thể (dựa vào libraryCode)
+        /// </summary>
+        /// <param name="libraryCode">Mã code của library có liên quan</param>
+        /// <returns></returns>
         public LinkedList<Media> GetAllMediaInLibrary(string libraryCode)
         {
             string query = $@"
@@ -106,6 +116,11 @@ namespace Media_Player.Data
             return result;
         }
 
+        /// <summary>
+        /// Tạo mới 1 record
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
         public int Create(Media media)
         {
             string query = $@"
@@ -115,6 +130,11 @@ namespace Media_Player.Data
             return this.Database.ExecuteNonQuery(query);
         }
 
+        /// <summary>
+        /// Xóa bỏ
+        /// </summary>
+        /// <param name="media"></param>
+        /// <returns></returns>
         public int Delete(Media media)
         {
             string query = $@"DELETE FROM Media WHERE Code = '{media.Code}';";

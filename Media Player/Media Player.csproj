@@ -124,6 +124,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmLibraryManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmLibraryManagement.Designer.cs">
+      <DependentUpon>frmLibraryManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmMusicPlayer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,10 +152,21 @@
     <Compile Include="UI\frmMusicPlayer.extend.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\frmPlaylistRemoveMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmPlaylistRemoveMedia.Designer.cs">
+      <DependentUpon>frmPlaylistRemoveMedia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\CodeUtils.cs" />
-    <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\SortUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
+    <EmbeddedResource Include="UI\frmLibraryManagement.resx">
+      <DependentUpon>frmLibraryManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmPlaylistRemoveMedia.resx">
+      <DependentUpon>frmPlaylistRemoveMedia.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="database.db" />
     <None Include="Properties\DataSources\Media_Player.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\Media_Player.Properties.Settings.datasource" />

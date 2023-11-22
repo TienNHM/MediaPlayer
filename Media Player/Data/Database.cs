@@ -9,11 +9,20 @@ using System.Threading.Tasks;
 
 namespace Media_Player.Data
 {
+    /// <summary>
+    /// Class dùng để kết nối đến SQLite
+    /// </summary>
     public class Database
     {
+        /// <summary>
+        /// ConnectionString đến file database
+        /// </summary>
         public SQLiteConnection Connection { get; set; }
         public SQLiteDataAdapter DataAdapter { get; set; }
 
+        /// <summary>
+        /// Hàm khởi tạo (hàm dựng) mặc định
+        /// </summary>
         public Database()
         {
             this.Connection = new SQLiteConnection(@"data source=Resources/database.db");
@@ -29,6 +38,11 @@ namespace Media_Player.Data
             this.Connection = new SQLiteConnection(connectionString);
         }
 
+        /// <summary>
+        /// Thực thi các câu lệnh Cập nhật, thêm, xóa, sửa
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
         public int ExecuteNonQuery(string sql)
         {
             this.Connection.Open();

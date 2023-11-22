@@ -18,6 +18,10 @@ namespace Media_Player.Data
             this.Database = new Database();
         }
 
+        /// <summary>
+        /// Lấy danh sách tất cả LibraryInfo
+        /// </summary>
+        /// <returns></returns>
         public LinkedList<LibraryInfo> GetAll()
         {
             LinkedList<LibraryInfo> rerult = new LinkedList<LibraryInfo>();
@@ -50,6 +54,11 @@ namespace Media_Player.Data
             return rerult;
         }
 
+        /// <summary>
+        /// Tạo mới 1 record
+        /// </summary>
+        /// <param name="libraryInfo"></param>
+        /// <returns></returns>
         public int Create(LibraryInfo libraryInfo)
         {
             string query = $@"
@@ -59,9 +68,27 @@ namespace Media_Player.Data
             return this.Database.ExecuteNonQuery(query);
         }
 
+        /// <summary>
+        /// Xóa bỏ record
+        /// </summary>
+        /// <param name="libraryInfo"></param>
+        /// <returns></returns>
         public int Delete(LibraryInfo libraryInfo)
         {
             string query = $@"DELETE FROM LibraryInfo WHERE Id = '{libraryInfo.Id}';";
+
+            return this.Database.ExecuteNonQuery(query);
+        }
+
+        /// <summary>
+        /// Loại bỏ bài hát khỏi danh sách phát
+        /// </summary>
+        /// <param name="libraryCode">Mã code của library có liên quan</param>
+        /// <param name="mediaCode">Mã code của bài hát cần xóa</param>
+        /// <returns></returns>
+        public int RemoveMedia(string libraryCode, string mediaCode)
+        {
+            string query = $@"DELETE FROM LibraryInfo WHERE LibraryCode = '{libraryCode}' AND MediaCode = '{mediaCode}';";
 
             return this.Database.ExecuteNonQuery(query);
         }

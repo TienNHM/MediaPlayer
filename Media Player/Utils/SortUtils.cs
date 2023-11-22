@@ -28,6 +28,10 @@ namespace Media_Player.Utils
             }
         }
 
+        /// <summary>
+        /// Sắp xếp tăng dần các bài hát, dùng thuật toán Bubble Sort
+        /// </summary>
+        /// <param name="medias"></param>
         private static void SortMediaAsc(List<Media> medias)
         {
             for (int i = 0; i < medias.Count - 1; i++)
@@ -46,6 +50,10 @@ namespace Media_Player.Utils
             }
         }
 
+        /// <summary>
+        /// Sắp xếp giảm dần các bài hát, dùng thuật toán Bubble sort
+        /// </summary>
+        /// <param name="medias"></param>
         private static void SortMediaDesc(List<Media> medias)
         {
             for (int i = 0; i < medias.Count - 1; i++)

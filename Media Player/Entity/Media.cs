@@ -38,6 +38,11 @@ namespace Media_Player.Entity
         /// </summary>
         public string Status {  get; set; }
 
+
+        /// <summary>
+        /// Hàm dùng để hiển thị chính xác thông tin (tên) bài hát lên giao diện
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.Name;

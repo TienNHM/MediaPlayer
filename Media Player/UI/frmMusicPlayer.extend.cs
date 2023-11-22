@@ -8,6 +8,7 @@ namespace Media_Player.UI
 {
     public partial class frmMusicPlayer : Form
     {
+        // Hàm tạo 1 button icon
         private IconButton CreateIconButton(string name, string text)
         {
             IconButton iconButton = new IconButton();
@@ -36,8 +37,16 @@ namespace Media_Player.UI
             return iconButton;
         }
 
+        /// <summary>
+        /// Hàm tạo mới 1 Tab chứa danh sách các bài hát trong library
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="code"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private TabPage CreateTabPage(string name, string code, List<Media> data)
         {
+            // Khởi tạo listBox chứa danh sách các bài hát
             ListBox listMedia = new ListBox();
             listMedia.BackColor = Color.LightBlue;
             listMedia.BorderStyle = BorderStyle.None;
@@ -47,13 +56,14 @@ namespace Media_Player.UI
             listMedia.FormattingEnabled = true;
             listMedia.ItemHeight = 35;
             listMedia.Location = new Point(3, 2);
-            listMedia.Margin = new Padding(3, 2, 3, 2);
-            listMedia.Name = $"ListMedia_{code}";
+            listMedia.Margin = new Padding(3, 2, 3, 2); 
+            listMedia.Name = $"ListMedia_{code}"; // Quan trọng
             listMedia.Size = new Size(784, 648);
             listMedia.TabIndex = 0;
             listMedia.SelectedIndexChanged += new System.EventHandler(listSongs_SelectedIndexChanged);
             listMedia.DataSource = data;
 
+            // Khởi tạo 1 tab
             TabPage tabPage = new TabPage();
             tabPage.AutoScroll = true;
             tabPage.BackColor = Color.LightBlue;
@@ -62,7 +72,7 @@ namespace Media_Player.UI
             tabPage.ForeColor = Color.SteelBlue;
             tabPage.Location = new Point(4, 44);
             tabPage.Margin = new Padding(3, 2, 3, 2);
-            tabPage.Name = $"TabLibrary_{code}";
+            tabPage.Name = $"TabLibrary_{code}"; // Quan trọng
             tabPage.Padding = new Padding(3, 2, 3, 2);
             tabPage.Size = new Size(790, 652);
             tabPage.TabIndex = 0;

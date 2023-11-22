@@ -1,6 +1,7 @@
 ﻿using Media_Player.Constants;
 using Media_Player.Data;
 using Media_Player.Entity;
+using Media_Player.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,10 +25,15 @@ namespace Media_Player
                 this.selectLibrary.DataSource = value.ToList();
             }
         }
+
+        /// <summary>
+        /// Thông tin bài hát đang được chọn
+        /// </summary>
         public Media SelectedMedia { get; set; }
 
         private bool isShowSelectLibrary = false;
         private LibraryInfoDB _libraryInfoDB { get; set; }
+        private LibraryDB _libraryDB { get; set; }
 
         public MediaAction SelectedAction { get; set; }
         public frmMediaActionMenu()
@@ -39,6 +45,7 @@ namespace Media_Player
         private void InitData()
         {
             this._libraryInfoDB = new LibraryInfoDB();
+            this._libraryDB = new LibraryDB();
         }
 
         private void btnAddFav_Click(object sender, EventArgs e)
@@ -52,10 +59,17 @@ namespace Media_Player
             this.Close();
         }
 
+        /// <summary>
+        /// Hàm xử lý cho nút OK
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
+            // Lấy ra thông tin library đang được chọn
             var library = this.selectLibrary.SelectedItem as Library;
 
+            // Tạo mới 1 thông tin libraryInfo: cho biết thư viện library nào đang chứa bài hát được chọn
             LibraryInfo libraryInfo = new LibraryInfo()
             {
                 LibraryCode = library.Code,
@@ -65,7 +79,29 @@ namespace Media_Player
             
             _libraryInfoDB.Create(libraryInfo);
 
+            // Hiển thị thông báo
             MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// Hàm xử lý khi bấm nút xóa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            // Lấy danh sách tất cả libraries đang có
+            var libraries = _libraryDB.GetAllLibrariesByMediaCode(this.SelectedMedia.Code);
+
+            // Tạo mới form, truyền data ngay khi khởi tạo
+            frmPlaylistRemoveMedia frmPlaylistRemoveMedia = new frmPlaylistRemoveMedia()
+            {
+                Media = SelectedMedia
+            };
+            // gán thông tin DataSource cho giao diện, để hiển thị ngay khi form vừa mở lên
+            frmPlaylistRemoveMedia.listBoxLibrary.DataSource = libraries.ToList();
+            
+            frmPlaylistRemoveMedia.ShowDialog();
         }
     }
 

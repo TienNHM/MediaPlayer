@@ -100,10 +100,10 @@
             // txtLibName
             // 
             this.txtLibName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtLibName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLibName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLibName.Location = new System.Drawing.Point(10, 33);
             this.txtLibName.Name = "txtLibName";
-            this.txtLibName.Size = new System.Drawing.Size(375, 45);
+            this.txtLibName.Size = new System.Drawing.Size(375, 36);
             this.txtLibName.TabIndex = 0;
             // 
             // label1

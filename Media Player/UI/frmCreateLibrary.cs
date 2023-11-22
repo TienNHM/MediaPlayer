@@ -19,12 +19,22 @@ namespace Media_Player
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Đóng form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
+        /// <summary>
+        /// Trả về LibraryName cho form chính
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.LibraryName = this.txtLibName.Text.Trim();
