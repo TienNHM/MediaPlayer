@@ -46,11 +46,6 @@
             this.btnLibrary = new FontAwesome.Sharp.IconButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.tabSongVideo = new System.Windows.Forms.TabControl();
-            this.tabSongs = new System.Windows.Forms.TabPage();
-            this.listSongs = new System.Windows.Forms.ListBox();
-            this.tabVideos = new System.Windows.Forms.TabPage();
-            this.listVideos = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableFooter = new System.Windows.Forms.TableLayoutPanel();
             this.btnBack = new FontAwesome.Sharp.IconButton();
@@ -62,6 +57,10 @@
             this.selectLibrary = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnLibManager = new FontAwesome.Sharp.IconButton();
+            this.tabSongs = new System.Windows.Forms.TabPage();
+            this.listSongs = new System.Windows.Forms.ListBox();
+            this.tabSongVideo = new System.Windows.Forms.TabControl();
             ((System.ComponentModel.ISupportInitialize)(this.containerMain)).BeginInit();
             this.containerMain.Panel1.SuspendLayout();
             this.containerMain.Panel2.SuspendLayout();
@@ -77,14 +76,13 @@
             this.panelFavorite.SuspendLayout();
             this.panelLibrary.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabSongVideo.SuspendLayout();
-            this.tabSongs.SuspendLayout();
-            this.tabVideos.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.tabSongs.SuspendLayout();
+            this.tabSongVideo.SuspendLayout();
             this.SuspendLayout();
             // 
             // containerMain
@@ -104,8 +102,8 @@
             // 
             this.containerMain.Panel2.BackColor = System.Drawing.Color.Gray;
             this.containerMain.Panel2.Controls.Add(this.panel2);
-            this.containerMain.Size = new System.Drawing.Size(1091, 740);
-            this.containerMain.SplitterDistance = 637;
+            this.containerMain.Size = new System.Drawing.Size(1091, 807);
+            this.containerMain.SplitterDistance = 704;
             this.containerMain.TabIndex = 0;
             // 
             // panel1
@@ -116,7 +114,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1091, 637);
+            this.panel1.Size = new System.Drawing.Size(1091, 704);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutMain
@@ -132,7 +130,7 @@
             this.tableLayoutMain.Name = "tableLayoutMain";
             this.tableLayoutMain.RowCount = 1;
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.Size = new System.Drawing.Size(1091, 637);
+            this.tableLayoutMain.Size = new System.Drawing.Size(1091, 704);
             this.tableLayoutMain.TabIndex = 2;
             // 
             // axWindowsMediaPlayer
@@ -143,7 +141,7 @@
             this.axWindowsMediaPlayer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.axWindowsMediaPlayer.Name = "axWindowsMediaPlayer";
             this.axWindowsMediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer.OcxState")));
-            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(253, 633);
+            this.axWindowsMediaPlayer.Size = new System.Drawing.Size(253, 700);
             this.axWindowsMediaPlayer.TabIndex = 1;
             this.axWindowsMediaPlayer.CurrentItemChange += new AxWMPLib._WMPOCXEvents_CurrentItemChangeEventHandler(this.axWindowsMediaPlayer_CurrentItemChange);
             // 
@@ -165,7 +163,7 @@
             this.splitContainerMain.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(214)))), ((int)(((byte)(198)))));
             this.splitContainerMain.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.splitContainerMain.Panel2.Controls.Add(this.tabSongVideo);
-            this.splitContainerMain.Size = new System.Drawing.Size(1091, 633);
+            this.splitContainerMain.Size = new System.Drawing.Size(1091, 700);
             this.splitContainerMain.SplitterDistance = 289;
             this.splitContainerMain.TabIndex = 0;
             // 
@@ -188,13 +186,14 @@
             this.tableLayoutSidebar.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutSidebar.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutSidebar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutSidebar.Size = new System.Drawing.Size(267, 613);
+            this.tableLayoutSidebar.Size = new System.Drawing.Size(267, 680);
             this.tableLayoutSidebar.TabIndex = 6;
             // 
             // panelFavorite
             // 
             this.panelFavorite.AutoSize = true;
             this.panelFavorite.Controls.Add(this.panel3);
+            this.panelFavorite.Controls.Add(this.btnLibManager);
             this.panelFavorite.Controls.Add(this.btnCreateNewLibrary);
             this.panelFavorite.Controls.Add(this.btnFavorite);
             this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -202,7 +201,7 @@
             this.panelFavorite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelFavorite.Name = "panelFavorite";
             this.panelFavorite.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelFavorite.Size = new System.Drawing.Size(261, 272);
+            this.panelFavorite.Size = new System.Drawing.Size(261, 339);
             this.panelFavorite.TabIndex = 6;
             // 
             // btnCreateNewLibrary
@@ -416,86 +415,6 @@
             this.txtSearch.TabIndex = 0;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
-            // tabSongVideo
-            // 
-            this.tabSongVideo.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabSongVideo.Controls.Add(this.tabSongs);
-            this.tabSongVideo.Controls.Add(this.tabVideos);
-            this.tabSongVideo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabSongVideo.ItemSize = new System.Drawing.Size(120, 40);
-            this.tabSongVideo.Location = new System.Drawing.Point(0, 0);
-            this.tabSongVideo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabSongVideo.Multiline = true;
-            this.tabSongVideo.Name = "tabSongVideo";
-            this.tabSongVideo.SelectedIndex = 0;
-            this.tabSongVideo.Size = new System.Drawing.Size(798, 633);
-            this.tabSongVideo.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabSongVideo.TabIndex = 0;
-            this.tabSongVideo.SelectedIndexChanged += new System.EventHandler(this.tabSongVideo_SelectedIndexChanged);
-            // 
-            // tabSongs
-            // 
-            this.tabSongs.AutoScroll = true;
-            this.tabSongs.BackColor = System.Drawing.Color.LightBlue;
-            this.tabSongs.Controls.Add(this.listSongs);
-            this.tabSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabSongs.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabSongs.Location = new System.Drawing.Point(4, 44);
-            this.tabSongs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabSongs.Name = "tabSongs";
-            this.tabSongs.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabSongs.Size = new System.Drawing.Size(790, 585);
-            this.tabSongs.TabIndex = 0;
-            this.tabSongs.Text = "Songs";
-            // 
-            // listSongs
-            // 
-            this.listSongs.BackColor = System.Drawing.Color.LightBlue;
-            this.listSongs.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listSongs.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listSongs.ForeColor = System.Drawing.Color.DarkCyan;
-            this.listSongs.FormattingEnabled = true;
-            this.listSongs.ItemHeight = 35;
-            this.listSongs.Location = new System.Drawing.Point(3, 2);
-            this.listSongs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.listSongs.Name = "listSongs";
-            this.listSongs.Size = new System.Drawing.Size(784, 581);
-            this.listSongs.TabIndex = 0;
-            this.listSongs.SelectedIndexChanged += new System.EventHandler(this.listSongs_SelectedIndexChanged);
-            // 
-            // tabVideos
-            // 
-            this.tabVideos.AutoScroll = true;
-            this.tabVideos.BackColor = System.Drawing.Color.LightBlue;
-            this.tabVideos.Controls.Add(this.listVideos);
-            this.tabVideos.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabVideos.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabVideos.Location = new System.Drawing.Point(4, 44);
-            this.tabVideos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabVideos.Name = "tabVideos";
-            this.tabVideos.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabVideos.Size = new System.Drawing.Size(790, 585);
-            this.tabVideos.TabIndex = 1;
-            this.tabVideos.Text = "Videos";
-            // 
-            // listVideos
-            // 
-            this.listVideos.BackColor = System.Drawing.Color.LightBlue;
-            this.listVideos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listVideos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listVideos.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listVideos.ForeColor = System.Drawing.Color.DarkCyan;
-            this.listVideos.FormattingEnabled = true;
-            this.listVideos.ItemHeight = 35;
-            this.listVideos.Location = new System.Drawing.Point(3, 2);
-            this.listVideos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.listVideos.Name = "listVideos";
-            this.listVideos.Size = new System.Drawing.Size(784, 581);
-            this.listVideos.TabIndex = 0;
-            this.listVideos.SelectedIndexChanged += new System.EventHandler(this.listVideos_SelectedIndexChanged);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tableFooter);
@@ -634,13 +553,14 @@
             this.selectLibrary.Name = "selectLibrary";
             this.selectLibrary.Size = new System.Drawing.Size(261, 37);
             this.selectLibrary.TabIndex = 0;
+            this.selectLibrary.SelectedIndexChanged += new System.EventHandler(this.selectLibrary_SelectedIndexChanged);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.selectLibrary);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 107);
+            this.panel3.Location = new System.Drawing.Point(0, 154);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(261, 140);
             this.panel3.TabIndex = 6;
@@ -658,11 +578,82 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Phát danh sách";
             // 
+            // btnLibManager
+            // 
+            this.btnLibManager.AutoSize = true;
+            this.btnLibManager.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLibManager.FlatAppearance.BorderSize = 0;
+            this.btnLibManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLibManager.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
+            this.btnLibManager.ForeColor = System.Drawing.Color.White;
+            this.btnLibManager.IconChar = FontAwesome.Sharp.IconChar.Marker;
+            this.btnLibManager.IconColor = System.Drawing.Color.White;
+            this.btnLibManager.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnLibManager.IconSize = 32;
+            this.btnLibManager.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLibManager.Location = new System.Drawing.Point(0, 107);
+            this.btnLibManager.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLibManager.Name = "btnLibManager";
+            this.btnLibManager.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.btnLibManager.Size = new System.Drawing.Size(261, 47);
+            this.btnLibManager.TabIndex = 7;
+            this.btnLibManager.Text = "Quản lý";
+            this.btnLibManager.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLibManager.UseVisualStyleBackColor = true;
+            // 
+            // tabSongs
+            // 
+            this.tabSongs.AutoScroll = true;
+            this.tabSongs.BackColor = System.Drawing.Color.LightBlue;
+            this.tabSongs.Controls.Add(this.listSongs);
+            this.tabSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabSongs.ForeColor = System.Drawing.Color.SteelBlue;
+            this.tabSongs.Location = new System.Drawing.Point(4, 44);
+            this.tabSongs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabSongs.Name = "tabSongs";
+            this.tabSongs.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabSongs.Size = new System.Drawing.Size(790, 652);
+            this.tabSongs.TabIndex = 0;
+            this.tabSongs.Text = "Bài hát";
+            // 
+            // listSongs
+            // 
+            this.listSongs.BackColor = System.Drawing.Color.LightBlue;
+            this.listSongs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSongs.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listSongs.ForeColor = System.Drawing.Color.DarkCyan;
+            this.listSongs.FormattingEnabled = true;
+            this.listSongs.ItemHeight = 35;
+            this.listSongs.Location = new System.Drawing.Point(3, 2);
+            this.listSongs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listSongs.Name = "listSongs";
+            this.listSongs.Size = new System.Drawing.Size(784, 648);
+            this.listSongs.TabIndex = 0;
+            this.listSongs.SelectedIndexChanged += new System.EventHandler(this.listSongs_SelectedIndexChanged);
+            // 
+            // tabSongVideo
+            // 
+            this.tabSongVideo.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabSongVideo.Controls.Add(this.tabSongs);
+            this.tabSongVideo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabSongVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabSongVideo.ItemSize = new System.Drawing.Size(120, 40);
+            this.tabSongVideo.Location = new System.Drawing.Point(0, 0);
+            this.tabSongVideo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabSongVideo.Multiline = true;
+            this.tabSongVideo.Name = "tabSongVideo";
+            this.tabSongVideo.SelectedIndex = 0;
+            this.tabSongVideo.Size = new System.Drawing.Size(798, 700);
+            this.tabSongVideo.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabSongVideo.TabIndex = 0;
+            this.tabSongVideo.SelectedIndexChanged += new System.EventHandler(this.tabSongVideo_SelectedIndexChanged);
+            // 
             // frmMusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 740);
+            this.ClientSize = new System.Drawing.Size(1091, 807);
             this.Controls.Add(this.containerMain);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -692,14 +683,13 @@
             this.panelLibrary.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabSongVideo.ResumeLayout(false);
-            this.tabSongs.ResumeLayout(false);
-            this.tabVideos.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.tabSongs.ResumeLayout(false);
+            this.tabSongVideo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -720,11 +710,6 @@
         private FontAwesome.Sharp.IconButton btnAdd;
         private System.Windows.Forms.Panel panelFavorite;
         private System.Windows.Forms.TableLayoutPanel tableLayoutMain;
-        private System.Windows.Forms.TabControl tabSongVideo;
-        private System.Windows.Forms.TabPage tabSongs;
-        private System.Windows.Forms.ListBox listSongs;
-        private System.Windows.Forms.TabPage tabVideos;
-        private System.Windows.Forms.ListBox listVideos;
         private System.Windows.Forms.TableLayoutPanel tableFooter;
         private FontAwesome.Sharp.IconButton btnBack;
         private FontAwesome.Sharp.IconButton btnPlay;
@@ -739,5 +724,9 @@
         private System.Windows.Forms.ComboBox selectLibrary;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
+        private FontAwesome.Sharp.IconButton btnLibManager;
+        private System.Windows.Forms.TabControl tabSongVideo;
+        private System.Windows.Forms.TabPage tabSongs;
+        private System.Windows.Forms.ListBox listSongs;
     }
 }

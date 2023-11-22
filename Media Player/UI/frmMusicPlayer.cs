@@ -28,36 +28,36 @@ namespace Media_Player
         private readonly string PLAYLIST_ALL_VIDEOS = "All videos";
         private readonly string PLAYLIST_FAV_SONGS = "Favorite songs";
         private readonly string PLAYLIST_FAV_VIDEOS = "Favorite videos";
-        IWMPPlaylist playlistAllSongs, playlistAllVideos, playlistFavSongs, playlistFavVideos;
+        IWMPPlaylist playlistAllSongs, playlistFavSongs;
         private bool isLibraryExpanded = true;
         private bool isFavoriteExpanded = true;
         private bool isPlaying = false;
         private int selectedIndex = 0;
         private MediaDB _mediaDB = new MediaDB();
         private LibraryDB _libraryDB = new LibraryDB();
+        private List<Media> listSongData = new List<Media>();
         private LinkedList<Library> AllLibraries = new LinkedList<Library>();   
-        private List<string> MusicFileExtensions = new List<string>
+        private List<string> AvailableFileExtensions = new List<string>
         {
+            // Music
             MusicConsts.MovingPicturesExpertsGroup,
             MusicConsts.WindowsMediaFormats,
             MusicConsts.AudioWindows,
             MusicConsts.AudioVisualInterleave,
             MusicConsts.Mp4Audio,
             MusicConsts.FreeLosslessAudioCodec,
-        };
-        private List<string> VideoFileExtensions = new List<string>
-        {
+
+            // Video
             VideoConsts.Mp4Video,
             VideoConsts.QuickTimeMovie,
             VideoConsts.MovingPicturesExpertsGroup,
         };
+
         private enum TabMedia
         {
-            Music,
-            Video
+            Music
         }
-        private List<Media> listSongData = new List<Media>();
-        private List<Media> listVideoData = new List<Media>();
+
         public frmMusicPlayer()
         {
             InitializeComponent();
@@ -69,9 +69,7 @@ namespace Media_Player
         {
             this.axWindowsMediaPlayer.uiMode = "none";
             playlistAllSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_ALL_SONGS);
-            playlistAllVideos = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_ALL_VIDEOS);
             playlistFavSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_FAV_SONGS);
-            playlistFavVideos = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_FAV_VIDEOS);
             this.listSongs.Focus();
         }
 
@@ -83,15 +81,9 @@ namespace Media_Player
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
-            this.UpdateListVideosView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllVideos;
-                this.listVideos.SelectedIndex = this.listVideoData.Any() ? 0 : -1;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
                 this.listSongs.SelectedIndex = this.listSongData.Any() ? 0 : -1;
@@ -115,8 +107,7 @@ namespace Media_Player
         private void LoadMedias()
         {
             LinkedList<Media> allMedia = _mediaDB.GetAll();
-            this.listSongData = allMedia.Where(x => x.Type == MediaType.Music).ToList();
-            this.listVideoData = allMedia.Where(x => x.Type == MediaType.Video).ToList();
+            this.listSongData = allMedia.Where(x => x.Status == Status.Active).ToList();
 
         }
 
@@ -124,30 +115,13 @@ namespace Media_Player
         {
             this.isFavoriteExpanded = !this.isFavoriteExpanded;
             this.btnCreateNewLibrary.Visible = this.isFavoriteExpanded;
-            //this.panelAllFav.Visible = this.isFavoriteExpanded;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (tabSongVideo.SelectedIndex == (int)TabMedia.Video)
+            if (tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
-                ChooseVideo();
-
-                // Update playlist dang phat
-                this.tabSongVideo.SelectedIndex = (int)TabMedia.Video;
-                this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
-
-                // Update giao diện hiển thị
-                if (this.listVideos.Items.Count > 0)
-                {
-                    this.listVideos.SelectedIndex = 0;
-                    this.selectedIndex = 0;
-                    this.btnRemove.Enabled = true;
-                }
-            }
-            else
-            {
-                ChooseMusic();
+                ChooseFiles();
 
                 // Update playlist dang phat
                 this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
@@ -169,33 +143,7 @@ namespace Media_Player
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                int selectedIndex = this.listVideos.SelectedIndex;
-                Media selectedItem = this.listVideos.SelectedItem as Media;
-
-                string message = $"Bạn có muốn xóa bỏ bài hát *{selectedItem.Name}* không?";
-                var dialogResult = MessageBox.Show(message, "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
-
-                this.listVideoData.Remove(selectedItem);
-                this.playlistAllVideos.removeItem(this.playlistAllVideos.Item[selectedIndex]);
-
-                this._mediaDB.Delete(selectedItem);
-                
-                this.UpdateListVideosView();
-
-                this.listVideos.SelectedIndex = Math.Min(selectedIndex, this.listVideoData.Count - 1);
-                if (this.listVideoData.Count == 0)
-                {
-                    this.labeMediaName.Text = "";
-                    this.btnRemove.Enabled = false;
-                }
-            }
-            else
+            if (tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 int selectedIndex = this.listSongs.SelectedIndex;
                 Media selectedItem = this.listSongs.SelectedItem as Media;
@@ -275,9 +223,6 @@ namespace Media_Player
                 case (int)TabMedia.Music:
                     this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
                     break;
-                case (int)TabMedia.Video:
-                    this.axWindowsMediaPlayer.currentPlaylist = playlistAllVideos;
-                    break;
             }
         }
 
@@ -323,15 +268,7 @@ namespace Media_Player
             this.axWindowsMediaPlayer.Ctlcontrols.next();
             
             this.selectedIndex += 1;
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                if (this.selectedIndex == this.listVideoData.Count)
-                {
-                    this.selectedIndex = 0;
-                }
-                this.listVideos.SelectedIndex = this.selectedIndex;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 if (this.selectedIndex == this.listSongData.Count)
                 {
@@ -347,16 +284,7 @@ namespace Media_Player
 
             this.selectedIndex -= 1;
            
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                if (this.selectedIndex < 0)
-                {
-                    this.selectedIndex = this.listVideoData.Count - 1;
-                }
-                this.listVideos.SelectedIndex = this.selectedIndex;
-
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 if (this.selectedIndex < 0)
                 {
@@ -370,23 +298,15 @@ namespace Media_Player
         {
             // Sort data tăng dần
             SortUtils.SortMedia(this.listSongData, SortDirection.Asc);
-            SortUtils.SortMedia(this.listVideoData, SortDirection.Asc);
 
             // Sort playlist tăng dần
             SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Asc);
-            SortUtils.SortPlaylist(this.playlistAllVideos, SortDirection.Asc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
-            this.UpdateListVideosView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllVideos;
-                this.listVideos.SelectedIndex = 0;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
                 this.listSongs.SelectedIndex = 0;
@@ -397,47 +317,27 @@ namespace Media_Player
         {
             // Sort data giảm dần
             SortUtils.SortMedia(this.listSongData, SortDirection.Desc);
-            SortUtils.SortMedia(this.listVideoData, SortDirection.Desc);
 
             // Sort playlist giảm dần
             SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Desc);
-            SortUtils.SortPlaylist(this.playlistAllVideos, SortDirection.Desc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
-            this.UpdateListVideosView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllVideos;
-                this.listVideos.SelectedIndex = 0;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
                 this.listSongs.SelectedIndex = 0;
             }
         }
 
-        private void listVideos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int selectedIndex = this.listVideos.SelectedIndex;
-            Media selectedItem = this.listVideos.SelectedItem as Media;
-
-            if (selectedIndex >= 0 && selectedIndex < playlistAllVideos.count)
-            {
-                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllVideos.Item[selectedIndex]);
-                //this.axWindowsMediaPlayer.URL = listVideoData[index].FilePath;
-            }
-        }
-
-        private void ChooseMusic()
+        private void ChooseFiles()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = true;
-            dialog.Title = "Choose music";
-            dialog.Filter = string.Join("|", MusicFileExtensions);
+            dialog.Title = "Choose media";
+            dialog.Filter = string.Join("|", AvailableFileExtensions);
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -448,7 +348,7 @@ namespace Media_Player
                 this.playlistAllSongs.clear();
                 
                 // Cập nhật playlist
-                UpdatePlaylist("Song", files.ToList());
+                UpdatePlaylist("All", files.ToList());
 
                 this.UpdateListSongsView();
             }
@@ -456,12 +356,6 @@ namespace Media_Player
 
         private void InitPlaylists()
         {
-            foreach (Media media in this.listVideoData)
-            {
-                var mediaItem = this.axWindowsMediaPlayer.newMedia(media.FilePath);
-                this.playlistAllVideos.appendItem(mediaItem);
-            }
-
             foreach (Media media in this.listSongData)
             {
                 var mediaItem = this.axWindowsMediaPlayer.newMedia(media.FilePath);
@@ -475,26 +369,7 @@ namespace Media_Player
             {
                 return;
             }    
-            else if (playlistName == "Video")
-            {
-                foreach (string filePath in listFilePaths)
-                {
-                    var mediaItem = this.axWindowsMediaPlayer.newMedia(filePath);
-                    this.playlistAllVideos.appendItem(mediaItem);
-
-                    Media media = new Media()
-                    {
-                        Code = CodeUtils.GenCode(),
-                        FilePath = filePath,
-                        Name = mediaItem.name,
-                        Status = Status.Active,
-                        Type = MediaType.Video
-                    };
-                    this.listVideoData.Add(media);
-                    _mediaDB.Create(media);
-                }
-            }
-            else
+            else if (playlistName == "All")
             {
                 foreach (string filePath in listFilePaths)
                 {
@@ -518,12 +393,7 @@ namespace Media_Player
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string query = txtSearch.Text;
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                List<Media> mediaList = Search(this.listVideoData, query);
-                this.listVideos.DataSource = mediaList;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 List<Media> mediaList = Search(this.listSongData, query);
                 this.listSongs.DataSource = mediaList;
@@ -555,18 +425,20 @@ namespace Media_Player
 
         private Media GetSelectedMedia()
         {
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Video)
-            {
-                return this.listVideos.SelectedItem as Media;
-            }
-            else
+            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
             {
                 return this.listSongs.SelectedItem as Media;
             }
+            return null;
         }
         private void btnMediaAction_Click(object sender, EventArgs e)
         {
             Media selectedMedia = GetSelectedMedia();
+
+            if (selectedMedia is null)
+            {
+                return;
+            }
 
             using (frmMediaActionMenu mediaActionMenu = new frmMediaActionMenu()
             {
@@ -605,6 +477,16 @@ namespace Media_Player
             }
         }
 
+        private void selectLibrary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.selectLibrary.SelectedIndex > 0)
+            {
+                Library library = this.selectLibrary.SelectedItem as Library;
+
+                MessageBox.Show($"Đang phát danh sách {library.Name}");
+            }
+        }
+
         /// <summary>
         /// Cập nhật lại danh sách bài hát tren giao diện
         /// </summary>
@@ -615,40 +497,6 @@ namespace Media_Player
 
             // Cập nhật lại danh sách tên các bài hát dựa vào listSongData
             this.listSongs.Items.AddRange(this.listSongData.ToArray());
-        }
-
-        private void ChooseVideo()
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = true;
-            dialog.Title = "Choose video";
-            dialog.Filter = string.Join("|", VideoFileExtensions);
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                // Get the selected files
-                string[] files = dialog.FileNames;
-
-                // Xóa tất cả video có trong playlist hiện tại
-                this.playlistAllVideos.clear();
-
-                // Cập nhật playlist
-                UpdatePlaylist("Video", files.ToList());
-
-                this.UpdateListVideosView();
-            }
-        }
-
-        /// <summary>
-        /// Cập nhật lại danh sách video trên giao diện
-        /// </summary>
-        private void UpdateListVideosView()
-        {
-            // Xóa tất cả tên các video hiện có trên giao diện
-            this.listVideos.Items.Clear();
-
-            // Cập nhật lại tên các video dựa vào listVideoData
-            this.listVideos.Items.AddRange(this.listVideoData.ToArray());
         }
     }
 }

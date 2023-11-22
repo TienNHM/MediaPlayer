@@ -68,6 +68,44 @@ namespace Media_Player.Data
             return result;
         }
 
+        public LinkedList<Media> GetAllMediaInLibrary(string libraryCode)
+        {
+            string query = $@"
+                SELECT Media.*
+                FROM LibraryInfo INNER JOIN Media ON LibraryInfo.MediaCode = Media.Code
+                WHERE LibraryInfo.Code = '{libraryCode}' AND Media.Status = '{Status.Active}';";
+
+            LinkedList<Media> result = new LinkedList<Media>();
+
+            this.Database.Connection.Open();
+
+            SQLiteCommand command = new SQLiteCommand(query, this.Database.Connection);
+
+            SQLiteDataReader dataReader = command.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                if (!dataReader.IsDBNull(1))
+                {
+                    Media media = new Media()
+                    {
+                        Id = dataReader.GetInt32(0),
+                        Code = dataReader.GetString(1),
+                        Name = dataReader.GetString(2),
+                        FilePath = dataReader.GetString(3),
+                        Type = dataReader.GetString(4),
+                        Status = dataReader.GetString(5)
+                    };
+                    result.AddLast(media);
+                }
+            }
+            dataReader.Close();
+
+            this.Database.Connection.Close();
+
+            return result;
+        }
+
         public int Create(Media media)
         {
             string query = $@"
