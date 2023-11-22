@@ -699,11 +699,14 @@ namespace Media_Player.UI
             // Nếu ở tab Tất cả
             if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
-                // Xóa các tên bài hát đang hiển thị trên giao diện
-                this.listSongs.Items.Clear();
-
                 // Cập nhật lại danh sách tên các bài hát dựa vào listSongData
-                this.listSongs.Items.AddRange(this.listSongData.ToArray());
+                this.listSongs.DataSource = this.listSongData.ToList();
+
+                //// Xóa các tên bài hát đang hiển thị trên giao diện
+                //this.listSongs.Items.Clear();
+
+                //// Cập nhật lại danh sách tên các bài hát dựa vào listSongData
+                //this.listSongs.Items.AddRange(this.listSongData.ToArray());
             }
             // Ngược lại
             else
