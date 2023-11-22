@@ -73,7 +73,7 @@ namespace Media_Player.Data
             string query = $@"
                 SELECT Media.*
                 FROM LibraryInfo INNER JOIN Media ON LibraryInfo.MediaCode = Media.Code
-                WHERE LibraryInfo.Code = '{libraryCode}' AND Media.Status = '{Status.Active}';";
+                WHERE LibraryInfo.LibraryCode = '{libraryCode}' AND Media.Status = '{Status.Active}';";
 
             LinkedList<Media> result = new LinkedList<Media>();
 

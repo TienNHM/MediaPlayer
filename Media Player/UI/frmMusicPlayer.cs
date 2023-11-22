@@ -20,15 +20,12 @@ using WMPLib;
 using MusicConsts = Media_Player.Constants.MusicExtensionFilterConsts;
 using VideoConsts = Media_Player.Constants.VideoExtensionFilterConsts;
 
-namespace Media_Player
+namespace Media_Player.UI
 {
     public partial class frmMusicPlayer : Form
     {
-        private readonly string PLAYLIST_ALL_SONGS = "All songs";
-        private readonly string PLAYLIST_ALL_VIDEOS = "All videos";
-        private readonly string PLAYLIST_FAV_SONGS = "Favorite songs";
-        private readonly string PLAYLIST_FAV_VIDEOS = "Favorite videos";
-        IWMPPlaylist playlistAllSongs, playlistFavSongs;
+        private readonly string PLAYLIST = "Media Player";
+        IWMPPlaylist playlist;
         private bool isLibraryExpanded = true;
         private bool isFavoriteExpanded = true;
         private bool isPlaying = false;
@@ -68,8 +65,7 @@ namespace Media_Player
         private void Init()
         {
             this.axWindowsMediaPlayer.uiMode = "none";
-            playlistAllSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_ALL_SONGS);
-            playlistFavSongs = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST_FAV_SONGS);
+            playlist = axWindowsMediaPlayer.playlistCollection.newPlaylist(PLAYLIST);
             this.listSongs.Focus();
         }
 
@@ -83,9 +79,9 @@ namespace Media_Player
             this.UpdateListSongsView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlist;
                 this.listSongs.SelectedIndex = this.listSongData.Any() ? 0 : -1;
             }
         }
@@ -96,7 +92,7 @@ namespace Media_Player
             this.AllLibraries.AddFirst(new Library()
             {
                 Code = null,
-                Name = "#########",
+                Name = "Tất cả",
                 Status = Status.Active
             });
             var libraies = this.AllLibraries.ToList();
@@ -119,13 +115,13 @@ namespace Media_Player
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 ChooseFiles();
 
                 // Update playlist dang phat
-                this.tabSongVideo.SelectedIndex = (int)TabMedia.Music;
-                this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
+                this.tabLibrary.SelectedIndex = (int)TabMedia.Music;
+                this.axWindowsMediaPlayer.currentPlaylist = playlist;
 
                 // Update giao diện hiển thị
                 if (this.listSongs.Items.Count > 0)
@@ -143,7 +139,7 @@ namespace Media_Player
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 int selectedIndex = this.listSongs.SelectedIndex;
                 Media selectedItem = this.listSongs.SelectedItem as Media;
@@ -156,7 +152,7 @@ namespace Media_Player
                 }
 
                 this.listSongData.Remove(selectedItem);
-                this.playlistAllSongs.removeItem(this.playlistAllSongs.Item[selectedIndex]);
+                this.playlist.removeItem(this.playlist.Item[selectedIndex]);
 
                 this._mediaDB.Delete(selectedItem);
 
@@ -171,34 +167,6 @@ namespace Media_Player
             }
 
             this.axWindowsMediaPlayer.Ctlcontrols.play();
-        }
-
-        private IconButton CreateIconButton(string name, string text)
-        {
-            IconButton iconButton = new IconButton();
-            iconButton.AutoSize = true;
-            iconButton.Dock = System.Windows.Forms.DockStyle.Top;
-            iconButton.FlatAppearance.BorderSize = 0;
-            iconButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            iconButton.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World, ((byte)(0)));
-            iconButton.ForeColor = System.Drawing.Color.White;
-            iconButton.IconChar = FontAwesome.Sharp.IconChar.Star;
-            iconButton.IconColor = System.Drawing.Color.White;
-            iconButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconButton.IconSize = 32;
-            iconButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            iconButton.Location = new System.Drawing.Point(0, 154);
-            iconButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            iconButton.Name = name;
-            iconButton.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
-            iconButton.Size = new System.Drawing.Size(261, 47);
-            iconButton.TabIndex = 4;
-            iconButton.Text = text;
-            iconButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            iconButton.UseVisualStyleBackColor = true;
-            iconButton.Click += new System.EventHandler(this.btnFavVideos_Click);
-
-            return iconButton;
         }
 
         private void btnFavVideos_Click(object sender, EventArgs e)
@@ -216,24 +184,34 @@ namespace Media_Player
             this.btnSortDesc.Visible = this.isLibraryExpanded;
         }
 
-        private void tabSongVideo_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabLibrary_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (this.tabSongVideo.SelectedIndex)
+            LinkedList<Media> listMedia = new LinkedList<Media>();
+
+            int selectedIndex = this.tabLibrary.SelectedIndex;
+            if (selectedIndex == 0)
             {
-                case (int)TabMedia.Music:
-                    this.axWindowsMediaPlayer.currentPlaylist = playlistAllSongs;
-                    break;
+                listMedia = _mediaDB.GetAll();
             }
+            else
+            {
+                var library = this.selectLibrary.SelectedItem as Library;
+                listMedia = _mediaDB.GetAllMediaInLibrary(library.Code);
+            }
+
+            this.listSongData = listMedia.ToList();
+            InitPlaylists();
+            this.axWindowsMediaPlayer.currentPlaylist = this.playlist;
         }
 
         private void listSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = this.listSongs.SelectedIndex;
-            Media selectedItem = this.listSongs.SelectedItem as Media;
+            var listBox = sender as System.Windows.Forms.ListBox;
+            int selectedIndex = listBox.SelectedIndex;
 
-            if (selectedIndex >= 0 && selectedIndex < playlistAllSongs.count)
+            if (selectedIndex >= 0 && selectedIndex < playlist.count)
             {
-                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlistAllSongs.Item[selectedIndex]);
+                this.axWindowsMediaPlayer.Ctlcontrols.playItem(playlist.Item[selectedIndex]);
                 //this.axWindowsMediaPlayer.URL = listSongData[index].FilePath;
             }
         }
@@ -268,7 +246,7 @@ namespace Media_Player
             this.axWindowsMediaPlayer.Ctlcontrols.next();
             
             this.selectedIndex += 1;
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 if (this.selectedIndex == this.listSongData.Count)
                 {
@@ -284,7 +262,7 @@ namespace Media_Player
 
             this.selectedIndex -= 1;
            
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 if (this.selectedIndex < 0)
                 {
@@ -300,15 +278,15 @@ namespace Media_Player
             SortUtils.SortMedia(this.listSongData, SortDirection.Asc);
 
             // Sort playlist tăng dần
-            SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Asc);
+            SortUtils.SortPlaylist(this.playlist, SortDirection.Asc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlist;
                 this.listSongs.SelectedIndex = 0;
             }
         }
@@ -319,15 +297,15 @@ namespace Media_Player
             SortUtils.SortMedia(this.listSongData, SortDirection.Desc);
 
             // Sort playlist giảm dần
-            SortUtils.SortPlaylist(this.playlistAllSongs, SortDirection.Desc);
+            SortUtils.SortPlaylist(this.playlist, SortDirection.Desc);
 
             // Cập nhật giao diện
             this.UpdateListSongsView();
 
             // Cập nhật lại playlist đang phát cho axWindowsMediaPlayer
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
-                this.axWindowsMediaPlayer.currentPlaylist = this.playlistAllSongs;
+                this.axWindowsMediaPlayer.currentPlaylist = this.playlist;
                 this.listSongs.SelectedIndex = 0;
             }
         }
@@ -345,7 +323,7 @@ namespace Media_Player
                 string[] files = dialog.FileNames;
 
                 // Xóa danh sách phát hiện tại
-                this.playlistAllSongs.clear();
+                this.playlist.clear();
                 
                 // Cập nhật playlist
                 UpdatePlaylist("All", files.ToList());
@@ -356,10 +334,11 @@ namespace Media_Player
 
         private void InitPlaylists()
         {
+            this.playlist.clear();
             foreach (Media media in this.listSongData)
             {
                 var mediaItem = this.axWindowsMediaPlayer.newMedia(media.FilePath);
-                this.playlistAllSongs.appendItem(mediaItem);
+                this.playlist.appendItem(mediaItem);
             }
         }
 
@@ -374,7 +353,7 @@ namespace Media_Player
                 foreach (string filePath in listFilePaths)
                 {
                     var mediaItem = this.axWindowsMediaPlayer.newMedia(filePath);
-                    this.playlistAllSongs.appendItem(mediaItem);
+                    this.playlist.appendItem(mediaItem);
 
                     Media media = new Media()
                     {
@@ -393,7 +372,7 @@ namespace Media_Player
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string query = txtSearch.Text;
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 List<Media> mediaList = Search(this.listSongData, query);
                 this.listSongs.DataSource = mediaList;
@@ -425,7 +404,7 @@ namespace Media_Player
 
         private Media GetSelectedMedia()
         {
-            if (this.tabSongVideo.SelectedIndex == (int)TabMedia.Music)
+            if (this.tabLibrary.SelectedIndex == (int)TabMedia.Music)
             {
                 return this.listSongs.SelectedItem as Media;
             }
@@ -483,8 +462,29 @@ namespace Media_Player
             {
                 Library library = this.selectLibrary.SelectedItem as Library;
 
-                MessageBox.Show($"Đang phát danh sách {library.Name}");
+                int index = this.tabLibrary.TabPages.IndexOfKey($"TabLibrary_{library.Code}");
+
+                if (index >= 0)
+                {
+                    this.tabLibrary.SelectedIndex = index;
+                    return;
+                }
+
+                LinkedList<Media> data = _mediaDB.GetAllMediaInLibrary(library.Code);
+
+                TabPage tabPage = this.CreateTabPage(library.Name, library.Code, data.ToList());
+                this.tabLibrary.TabPages.Add(tabPage);
+                this.tabLibrary.SelectedIndex = this.tabLibrary.TabPages.Count - 1;
             }
+            else
+            {
+                this.tabLibrary.SelectedIndex = 0;
+            }
+        }
+
+        private void tabLibrary_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //MessageBox.Show($"tabLibrary_MouseDoubleClick: {tabLibrary.SelectedTab.Text}");
         }
 
         /// <summary>
